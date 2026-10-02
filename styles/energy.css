@@ -1,0 +1,119 @@
+.energy-lab,
+.energy-quiz {
+  margin-top: 28px;
+  border: 1px solid #bfd4e8;
+  border-radius: 16px;
+  background: #ffffff;
+  overflow: hidden;
+}
+.energy-intro {
+  margin: 0 26px 22px;
+  font-size: 22px;
+}
+.energy-layout {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 24px;
+}
+.energy-layout svg {
+  width: 100%;
+  display: block;
+}
+.energy-controls {
+  padding: 0 26px 24px;
+}
+.energy-controls label {
+  margin-top: 0;
+}
+.energy-readings {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  padding: 18px 26px;
+  background: #dfedfa;
+}
+.energy-layout .energy-readings {
+  grid-template-columns: repeat(2, 1fr);
+}
+.energy-readings > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.energy-readings span {
+  font-size: 16px;
+  color: var(--muted);
+}
+.energy-readings strong {
+  font-size: 27px;
+}
+.energy-bars {
+  display: grid;
+  gap: 20px;
+  margin-top: 28px;
+}
+.energy-bar-label {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.energy-observation {
+  margin-bottom: 0;
+  font-size: 20px;
+}
+.energy-quiz {
+  margin-top: 35px;
+}
+.energy-quiz .answers {
+  padding: 0 24px;
+}
+.energy-quiz .feedback {
+  margin: 24px;
+}
+.quiz-question {
+  font-size: 25px;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 24px 24px;
+}
+.quiz-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px;
+}
+.quiz-complete {
+  padding: 0 24px 20px;
+  font-weight: 700;
+  color: var(--primary);
+}
+.presentation .energy-readings span {
+  font-size: 20px;
+}
+@media (max-width: 760px) {
+  .energy-layout {
+    grid-template-columns: 1fr;
+  }
+  .energy-controls {
+    padding-top: 20px;
+  }
+  .energy-readings {
+    padding: 18px;
+    gap: 12px;
+  }
+  .energy-readings strong {
+    font-size: 22px;
+  }
+  .energy-readings span {
+    font-size: 14px;
+  }
+  .quiz-question {
+    font-size: 22px;
+  }
+  .energy-intro {
+    font-size: 20px;
+  }
+}
+.energy-bars .bar > div {
+  min-width: 0;
+}
