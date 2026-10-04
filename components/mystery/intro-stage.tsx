@@ -1,3 +1,4 @@
+import { ArrowRight, Clock, CircleDot } from "lucide-react";
 import type { StageProps } from "./types";
 import { MysteryScene } from "./mystery-scene";
 export function IntroStage({ headingRef, onNavigate }: StageProps) {
@@ -16,11 +17,18 @@ export function IntroStage({ headingRef, onNavigate }: StageProps) {
           Vì sao một xe lại trượt xa hơn?
         </p>
         <button className="primary cta" onClick={() => onNavigate(1)}>
-          Bắt đầu khám phá <span>→</span>
+          Bắt đầu khám phá{" "}
+          <span>
+            <ArrowRight className="inline-icon" aria-hidden="true" />
+          </span>
         </button>
         <div className="tags">
-          <span>◷ 15–20 phút</span>
-          <span>◎ Học qua trải nghiệm</span>
+          <span>
+            <Clock className="inline-icon" aria-hidden="true" /> 15–20 phút
+          </span>
+          <span>
+            <CircleDot className="inline-icon" aria-hidden="true" /> Học qua trải nghiệm
+          </span>
         </div>
       </div>
 

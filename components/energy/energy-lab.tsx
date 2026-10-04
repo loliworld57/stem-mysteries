@@ -1,4 +1,6 @@
 "use client";
+
+import { Play } from "lucide-react";
 import { formatNumber as format } from "@/lib/format";
 import { useRampSimulation } from "@/hooks/use-ramp-simulation";
 import { EnergyRamp } from "./energy-ramp";
@@ -62,7 +64,13 @@ export function EnergyLab({ simulation }: { simulation: ReturnType<typeof useRam
             }}
           />
           <button className="primary run" disabled={running} onClick={release}>
-            {running ? "Xe đang xuống dốc…" : "▶ Thả xe xuống dốc"}
+            {running ? (
+              "Xe đang xuống dốc…"
+            ) : (
+              <>
+                <Play className="inline-icon" aria-hidden="true" /> Thả xe xuống dốc
+              </>
+            )}
           </button>
           <div className="energy-bars">
             {[

@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowDown, CircleDot, Sparkles } from "lucide-react";
 import Link from "next/link";
 import { LearningIllustration } from "./learning-illustration";
 
@@ -17,15 +18,19 @@ export function HomeHero() {
         </p>
         <div className="home-hero-actions">
           <Link className="primary cta" href="#bi-an">
-            Khám phá các bí ẩn →
+            Khám phá các bí ẩn <ArrowRight className="inline-icon" aria-hidden="true" />
           </Link>
           <Link className="text-link" href="#stem">
-            Tìm hiểu STEM ↓
+            Tìm hiểu STEM <ArrowDown className="inline-icon" aria-hidden="true" />
           </Link>
         </div>
         <div className="tags">
-          <span>◎ Học qua trải nghiệm</span>
-          <span>✦ Cùng cả lớp khám phá</span>
+          <span>
+            <CircleDot className="inline-icon" aria-hidden="true" /> Học qua trải nghiệm
+          </span>
+          <span>
+            <Sparkles className="inline-icon" aria-hidden="true" /> Cùng cả lớp khám phá
+          </span>
         </div>
       </div>
       <LearningIllustration />

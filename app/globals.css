@@ -360,3 +360,11 @@ h1 {
 .presentation .site-footer-container {
   display: none;
 }
+
+.inline-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.15em;
+  flex-shrink: 0;
+}

@@ -1,3 +1,4 @@
+import { ArrowLeft } from "lucide-react";
 import { checkRequiredFields } from "./submit-feedback";
 import type { ChallengeState } from "@/lib/challenge-types";
 import type { ChallengeAction } from "@/lib/challenge-state";
@@ -46,7 +47,7 @@ export function PredictionPanel({
       </p>
       <div className="actions">
         <button className="secondary" onClick={() => dispatch({ type: "edit" })}>
-          ← Xem lại thiết kế
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Xem lại thiết kế
         </button>
         <button
           className="primary"

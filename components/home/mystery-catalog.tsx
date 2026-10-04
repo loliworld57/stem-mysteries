@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { problemCatalog } from "@/lib/problem-catalog";
 import { MysteryScene } from "@/components/mystery/mystery-scene";
@@ -36,7 +37,7 @@ export function MysteryCatalog() {
               </ul>
               <div className="mystery-meta">{problem.activitySummary}</div>
               <Link className="primary cta" href={problem.href}>
-                Bắt đầu khám phá →
+                Bắt đầu khám phá <ArrowRight className="inline-icon" aria-hidden="true" />
               </Link>
             </div>
           </article>

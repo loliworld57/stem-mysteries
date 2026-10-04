@@ -1,3 +1,4 @@
+import { CircleDot, Circle, Play } from "lucide-react";
 import { surfaces } from "@/lib/mystery-data";
 import { formatNumber } from "@/lib/format";
 import type { BrakingSimulation } from "@/hooks/use-braking-simulation";
@@ -17,7 +18,13 @@ export function BrakingControls({ simulation }: { simulation: BrakingSimulation 
           >
             <span style={{ background: s.color }} />
             {s.name}
-            <b>{surface === i ? "●" : "○"}</b>
+            <b>
+              {surface === i ? (
+                <CircleDot className="inline-icon" />
+              ) : (
+                <Circle className="inline-icon" />
+              )}
+            </b>
           </button>
         ))}
         <label htmlFor="speedKmh">
@@ -38,7 +45,13 @@ export function BrakingControls({ simulation }: { simulation: BrakingSimulation 
         </div>
       </fieldset>
       <button className="primary run" disabled={running} onClick={run}>
-        {running ? "Đang thử nghiệm…" : "▶ Chạy thí nghiệm"}
+        {running ? (
+          "Đang thử nghiệm…"
+        ) : (
+          <>
+            <Play className="inline-icon" aria-hidden="true" /> Chạy thí nghiệm
+          </>
+        )}
       </button>
     </aside>
   );

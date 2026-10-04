@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { surfaces } from "@/lib/mystery-data";
 import { TRACK_LENGTH } from "@/lib/physics";
 import { formatNumber } from "@/lib/format";
@@ -39,9 +40,14 @@ export function ExperimentNotebook({
         </div>
       )}
       <p className="comparison" role="status">
-        {comparison
-          ? "✓ Đã có phép so sánh công bằng: khác bề mặt, cùng vận tốc ban đầu."
-          : "Thử hai bề mặt khác nhau với cùng vận tốc ban đầu để so sánh công bằng."}
+        {comparison ? (
+          <>
+            <Check className="inline-icon" aria-hidden="true" /> Đã có phép so sánh công bằng: khác
+            bề mặt, cùng vận tốc ban đầu.
+          </>
+        ) : (
+          "Thử hai bề mặt khác nhau với cùng vận tốc ban đầu để so sánh công bằng."
+        )}
       </p>
     </div>
   );

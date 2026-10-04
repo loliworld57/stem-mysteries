@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { checkRequiredFields } from "./submit-feedback";
 import { formatNumber } from "@/lib/format";
 import { challengeConfig, statusLabels } from "@/lib/challenge-config";
@@ -105,7 +106,7 @@ export function ExperimentResult({
                 dispatch({ type: "improve" });
             }}
           >
-            Lập kế hoạch cải tiến →
+            Lập kế hoạch cải tiến <ArrowRight className="inline-icon" aria-hidden="true" />
           </button>
         </>
       ) : (
@@ -130,7 +131,7 @@ export function ExperimentResult({
                 dispatch({ type: "review" });
             }}
           >
-            Hoàn thiện phương án →
+            Hoàn thiện phương án <ArrowRight className="inline-icon" aria-hidden="true" />
           </button>
         </>
       )}

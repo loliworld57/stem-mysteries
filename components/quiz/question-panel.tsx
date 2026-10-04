@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import type { InvestigationQuiz } from "@/hooks/use-investigation-quiz";
 
 export function QuestionPanel({ quiz }: { quiz: InvestigationQuiz }) {
@@ -35,14 +36,14 @@ export function QuestionPanel({ quiz }: { quiz: InvestigationQuiz }) {
           disabled={quiz.activeIndex === 0}
           onClick={() => quiz.selectQuestion(quiz.activeIndex - 1)}
         >
-          ← Câu trước
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Câu trước
         </button>
         <button
           className="secondary"
           disabled={quiz.activeIndex === quiz.questions.length - 1}
           onClick={() => quiz.selectQuestion(quiz.activeIndex + 1)}
         >
-          Câu tiếp theo →
+          Câu tiếp theo <ArrowRight className="inline-icon" aria-hidden="true" />
         </button>
       </div>
     </section>

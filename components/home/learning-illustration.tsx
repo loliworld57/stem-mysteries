@@ -1,3 +1,4 @@
+import { CircleHelp } from "lucide-react";
 import { StemIcon } from "./stem-icon";
 
 export function LearningIllustration() {
@@ -10,7 +11,9 @@ export function LearningIllustration() {
       <div className="illustration-grid" aria-hidden="true" />
       <div className="illustration-orbit" aria-hidden="true" />
       <div className="illustration-center">
-        <span>?</span>
+        <span>
+          <CircleHelp size={65} aria-hidden="true" />
+        </span>
         <strong>Vì sao nhỉ?</strong>
       </div>
       <div className="illustration-topic science">

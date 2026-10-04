@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { challengeCatalog } from "@/lib/challenge-catalog";
 
@@ -21,7 +22,7 @@ export function ChallengeCatalog() {
             <p>{challenge.topics.join(" · ")}</p>
           </div>
           <Link className="primary cta" href={challenge.href}>
-            Nhận thử thách →
+            Nhận thử thách <ArrowRight className="inline-icon" aria-hidden="true" />
           </Link>
         </article>
       ))}

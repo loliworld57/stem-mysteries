@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import type { StageProps } from "./types";
 import { clues } from "@/lib/mystery-data";
 interface CluesStageProps extends StageProps {
@@ -24,7 +25,17 @@ export function CluesStage({ headingRef, onNavigate, seen, clue, onInspect }: Cl
           >
             <span className="clue-number">0{i + 1}</span>
             <h2>{c.title}</h2>
-            <span className="clue-action">{seen.includes(i) ? "✓ Đã xem" : "Xem manh mối →"}</span>
+            <span className="clue-action">
+              {seen.includes(i) ? (
+                <>
+                  <Check className="inline-icon" aria-hidden="true" /> Đã xem
+                </>
+              ) : (
+                <>
+                  Xem manh mối <ArrowRight className="inline-icon" aria-hidden="true" />
+                </>
+              )}
+            </span>
             {clue === i && <p>{c.text}</p>}
           </button>
         ))}
@@ -35,10 +46,10 @@ export function CluesStage({ headingRef, onNavigate, seen, clue, onInspect }: Cl
       </div>
       <div className="actions">
         <button className="secondary" onClick={() => onNavigate(0)}>
-          ← Quay lại
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Quay lại
         </button>
         <button className="primary" disabled={seen.length < 3} onClick={() => onNavigate(2)}>
-          Làm thí nghiệm →
+          Làm thí nghiệm <ArrowRight className="inline-icon" aria-hidden="true" />
         </button>
       </div>
     </section>

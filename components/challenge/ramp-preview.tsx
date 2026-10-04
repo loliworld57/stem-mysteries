@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import { challengeConfig, challengeSurfaces } from "@/lib/challenge-config";
 import { rampGeometry, challengeMotion } from "@/lib/challenge-physics";
 import type { ChallengeDesign, ChallengeEvidence } from "@/lib/challenge-types";
@@ -169,7 +170,6 @@ export function RampPreview({
               fontSize="19"
               fill="#1e3a8a"
             >
-              {offscreen ? "→ " : ""}
               {formatNumber(evidence.stoppingDistanceCm, 1)} cm{offscreen ? " · ngoài khung" : ""}
             </text>
           </g>
@@ -190,9 +190,10 @@ export function RampPreview({
         <text x="30" y="285" fontSize="19" fill="#173755">
           Bề mặt: {surface.label}
         </text>
+        {offscreen && <ArrowRight x={704} y={174} size={24} color="#173755" aria-hidden="true" />}
         {offscreen && (
           <text x="730" y="200" textAnchor="end" fontSize="19" fill="#173755">
-            Xe đi tiếp ngoài khung →
+            Xe đi tiếp ngoài khung
           </text>
         )}
       </svg>

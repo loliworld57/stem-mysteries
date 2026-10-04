@@ -1,3 +1,4 @@
+import { CircleDot } from "lucide-react";
 import { Rover } from "./rover";
 export function MysteryScene() {
   return (
@@ -37,7 +38,9 @@ export function MysteryScene() {
           ?
         </text>
       </svg>
-      <div className="scene-footer">● Cùng tìm lời giải cho điều bí ẩn.</div>
+      <div className="scene-footer">
+        <CircleDot className="inline-icon" aria-hidden="true" /> Cùng tìm lời giải cho điều bí ẩn.
+      </div>
     </div>
   );
 }

@@ -1,5 +1,7 @@
 "use client";
 
+import { CircleDot } from "lucide-react";
+
 import { useEffect, useRef, useState } from "react";
 import { useInvestigationQuiz } from "@/hooks/use-investigation-quiz";
 import { useBrakingSimulation } from "@/hooks/use-braking-simulation";
@@ -48,7 +50,8 @@ export function MysteryExperience() {
     <>
       <InvestigationProgress stage={stage} />
       <div className="case-label">
-        ● BÍ ẨN 001 <span>/</span> CHUYỂN ĐỘNG & NĂNG LƯỢNG
+        <CircleDot className="inline-icon" aria-hidden="true" /> BÍ ẨN 001 <span>/</span> CHUYỂN
+        ĐỘNG & NĂNG LƯỢNG
       </div>
       {stage === 0 && <IntroStage {...stageProps} />}
       {stage === 1 && <CluesStage {...stageProps} seen={seen} clue={clue} onInspect={inspect} />}

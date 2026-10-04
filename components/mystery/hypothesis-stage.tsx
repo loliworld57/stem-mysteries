@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import type { StageProps } from "./types";
 import type { InvestigationQuiz } from "@/hooks/use-investigation-quiz";
 import { QuestionNavigator } from "@/components/quiz/question-navigator";
@@ -32,17 +33,17 @@ export function HypothesisStage({ headingRef, onNavigate, quiz }: HypothesisStag
                 : `Còn ${quiz.answers.length - quiz.answeredCount} câu chưa trả lời.`}
             </p>
             <button className="primary cta" disabled={!quiz.allAnswered} onClick={quiz.submit}>
-              Nộp bài và xem kết quả →
+              Nộp bài và xem kết quả <ArrowRight className="inline-icon" aria-hidden="true" />
             </button>
           </div>
         </>
       )}
       <div className="actions">
         <button className="secondary" onClick={() => onNavigate(2)}>
-          ← Xem lại thí nghiệm
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Xem lại thí nghiệm
         </button>
         <button className="primary" disabled={!quiz.submitted} onClick={() => onNavigate(4)}>
-          Tổng kết bài học →
+          Tổng kết bài học <ArrowRight className="inline-icon" aria-hidden="true" />
         </button>
       </div>
     </section>

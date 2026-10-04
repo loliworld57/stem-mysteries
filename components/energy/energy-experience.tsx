@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight, ArrowLeft, Check, CircleDot } from "lucide-react";
+
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { useRampSimulation } from "@/hooks/use-ramp-simulation";
@@ -32,7 +34,8 @@ export function EnergyExperience() {
         ))}
       </div>
       <div className="case-label">
-        ● BÍ ẨN 002 <span>/</span> NĂNG LƯỢNG TRÊN DỐC
+        <CircleDot className="inline-icon" aria-hidden="true" /> BÍ ẨN 002 <span>/</span> NĂNG LƯỢNG
+        TRÊN DỐC
       </div>
       {stage === 0 && (
         <section className="hero">
@@ -48,7 +51,7 @@ export function EnergyExperience() {
               thay đổi thế nào?
             </p>
             <button className="primary cta" onClick={() => navigate(2)}>
-              Khám phá dốc không ma sát →
+              Khám phá dốc không ma sát <ArrowRight className="inline-icon" aria-hidden="true" />
             </button>
           </div>
           <div className="scene">
@@ -72,10 +75,10 @@ export function EnergyExperience() {
           <EnergyLab simulation={simulation} />
           <div className="actions">
             <button className="secondary" disabled={simulation.running} onClick={() => navigate(0)}>
-              ← Xem lại tình huống
+              <ArrowLeft className="inline-icon" aria-hidden="true" /> Xem lại tình huống
             </button>
             <button className="primary" disabled={simulation.running} onClick={() => navigate(3)}>
-              Suy luận từ thí nghiệm →
+              Suy luận từ thí nghiệm <ArrowRight className="inline-icon" aria-hidden="true" />
             </button>
           </div>
         </section>
@@ -83,7 +86,9 @@ export function EnergyExperience() {
       {stage === 3 && <HypothesisStage headingRef={headingRef} onNavigate={navigate} quiz={quiz} />}
       {stage === 4 && (
         <section className="conclusion">
-          <div className="solved">✓</div>
+          <div className="solved">
+            <Check className="inline-icon" aria-hidden="true" />
+          </div>
           <h1 ref={headingRef} tabIndex={-1}>
             Năng lượng chuyển hóa trên dốc
           </h1>
@@ -114,7 +119,7 @@ export function EnergyExperience() {
           </div>
           <div className="conclusion-actions mt-8">
             <button className="primary" onClick={() => navigate(2)}>
-              Tiếp tục thí nghiệm →
+              Tiếp tục thí nghiệm <ArrowRight className="inline-icon" aria-hidden="true" />
             </button>
             <Link className="secondary" href="/#bi-an">
               Chọn bài khám phá khác

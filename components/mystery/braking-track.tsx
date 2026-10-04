@@ -1,3 +1,4 @@
+import { Check, CircleDot } from "lucide-react";
 import { surfaces } from "@/lib/mystery-data";
 import { formatNumber } from "@/lib/format";
 import { kineticEnergy, kmhToMs, msToKmh, ROVER_MASS } from "@/lib/physics";
@@ -14,11 +15,17 @@ export function BrakingTrack({ simulation }: { simulation: BrakingSimulation }) 
       <div className="panel-title">
         <h2>Đường thử phanh</h2>
         <span>
-          {running
-            ? "● Xe đang trượt"
-            : motion.distance > 0
-              ? "✓ Xe đã dừng"
-              : "Sẵn sàng thử nghiệm"}
+          {running ? (
+            <>
+              <CircleDot className="inline-icon" aria-hidden="true" /> Xe đang trượt
+            </>
+          ) : motion.distance > 0 ? (
+            <>
+              <Check className="inline-icon" aria-hidden="true" /> Xe đã dừng
+            </>
+          ) : (
+            "Sẵn sàng thử nghiệm"
+          )}
         </span>
       </div>
       <svg

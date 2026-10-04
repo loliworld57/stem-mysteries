@@ -1,3 +1,4 @@
+import { Check } from "lucide-react";
 import { stages } from "@/lib/mystery-data";
 import type { Stage } from "./types";
 
@@ -10,7 +11,9 @@ export function InvestigationProgress({ stage }: { stage: Stage }) {
           className={`step ${index === stage ? "active" : ""} ${index < stage ? "done" : ""}`}
           aria-current={index === stage ? "step" : undefined}
         >
-          <span>{index < stage ? "✓" : `0${index + 1}`}</span>
+          <span>
+            {index < stage ? <Check className="inline-icon" aria-hidden="true" /> : `0${index + 1}`}
+          </span>
           {label}
         </div>
       ))}

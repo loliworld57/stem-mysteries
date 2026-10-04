@@ -1,3 +1,4 @@
+import { ArrowRight, RotateCcw, Check } from "lucide-react";
 import type { StageProps } from "./types";
 interface ConclusionStageProps extends StageProps {
   onRestart: () => void;
@@ -5,7 +6,9 @@ interface ConclusionStageProps extends StageProps {
 export function ConclusionStage({ headingRef, onNavigate, onRestart }: ConclusionStageProps) {
   return (
     <section className="conclusion">
-      <div className="solved">✓</div>
+      <div className="solved">
+        <Check className="inline-icon" aria-hidden="true" />
+      </div>
       <div className="eyebrow">Cả lớp đã khám phá rất tốt!</div>
       <h1 ref={headingRef} tabIndex={-1}>
         Đã tìm ra lời giải!
@@ -39,7 +42,9 @@ export function ConclusionStage({ headingRef, onNavigate, onRestart }: Conclusio
         </div>
       </div>
       <details>
-        <summary>Xem công thức và giả thiết →</summary>
+        <summary>
+          Xem công thức và giả thiết <ArrowRight className="inline-icon" aria-hidden="true" />
+        </summary>
         <p>
           Động năng Wđ = ½mv²; thế năng trọng trường Wt = mgh; cơ năng W = Wđ + Wt. Khi thay số: m
           dùng kg, v dùng m/s, h dùng m, năng lượng dùng J. Đổi v từ km/h sang m/s bằng cách chia
@@ -49,10 +54,10 @@ export function ConclusionStage({ headingRef, onNavigate, onRestart }: Conclusio
       </details>
       <div className="conclusion-actions mt-8">
         <button className="primary" onClick={() => onNavigate(2)}>
-          Tiếp tục thí nghiệm →
+          Tiếp tục thí nghiệm <ArrowRight className="inline-icon" aria-hidden="true" />
         </button>
         <button className="secondary" onClick={onRestart}>
-          ↺ Khám phá lại từ đầu
+          <RotateCcw className="inline-icon" aria-hidden="true" /> Khám phá lại từ đầu
         </button>
       </div>
     </section>

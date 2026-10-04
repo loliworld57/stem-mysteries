@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight, ArrowLeft } from "lucide-react";
+
 import Link from "next/link";
 import { Toaster } from "sonner";
 import { useEffect, useRef } from "react";
@@ -47,7 +49,7 @@ export function EngineeringChallenge() {
         toastOptions={{ className: "challenge-toast", closeButtonAriaLabel: "Đóng thông báo" }}
       />
       <Link className="back-to-home" href="/#thu-thach">
-        ← Về danh sách thử thách STEM
+        <ArrowLeft className="inline-icon" aria-hidden="true" /> Về danh sách thử thách STEM
       </Link>
       <div className="case-label">THỬ THÁCH STEM 01</div>
       <h1>Thiết kế đường dốc an toàn</h1>
@@ -162,7 +164,7 @@ export function EngineeringChallenge() {
                           className="primary"
                           onClick={() => challenge.dispatch({ type: "predict" })}
                         >
-                          Tiếp tục dự đoán →
+                          Tiếp tục dự đoán <ArrowRight className="inline-icon" aria-hidden="true" />
                         </button>
                       </div>
                     </>

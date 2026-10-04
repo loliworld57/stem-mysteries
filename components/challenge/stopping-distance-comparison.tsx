@@ -1,3 +1,4 @@
+import { ArrowRight, Circle } from "lucide-react";
 import { challengeConfig, statusLabels } from "@/lib/challenge-config";
 import { stoppingChartMaxCm, stoppingDistanceMarker } from "@/lib/challenge-visualization";
 import { formatNumber } from "@/lib/format";
@@ -15,7 +16,9 @@ export function StoppingDistanceComparison({ attempts }: { attempts: ChallengeAt
       </p>
       <div className="challenge-distance-axis" aria-hidden="true">
         <span>0 cm</span>
-        <span>{stoppingChartMaxCm} cm →</span>
+        <span>
+          {stoppingChartMaxCm} cm <ArrowRight className="inline-icon" aria-hidden="true" />
+        </span>
       </div>
       <ol className="challenge-distance-list">
         {completed.map((attempt) => {
@@ -36,7 +39,11 @@ export function StoppingDistanceComparison({ attempts }: { attempts: ChallengeAt
                     className="challenge-distance-marker"
                     style={{ left: `${marker.positionPercent}%` }}
                   >
-                    {marker.overflow ? "→" : "●"}
+                    {marker.overflow ? (
+                      <ArrowRight size={26} aria-hidden="true" />
+                    ) : (
+                      <Circle size={16} fill="currentColor" aria-hidden="true" />
+                    )}
                   </span>
                 )}
               </div>

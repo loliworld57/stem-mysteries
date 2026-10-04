@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import {
   challengeConfig,
   challengeSurfaces,
@@ -92,7 +93,10 @@ export function EngineeringNotebook({ attempts }: { attempts: ChallengeAttempt[]
                 </p>
               )}
               <details>
-                <summary>Dự đoán → Phân tích → Cải tiến</summary>
+                <summary>
+                  Dự đoán <ArrowRight className="inline-icon" aria-hidden="true" /> Phân tích{" "}
+                  <ArrowRight className="inline-icon" aria-hidden="true" /> Cải tiến
+                </summary>
                 <h4>Vì sao nhóm dự đoán như vậy?</h4>
                 <p>{attempt.prediction.explanation}</p>
                 <h4>Phân tích kết quả</h4>

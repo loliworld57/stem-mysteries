@@ -1,5 +1,7 @@
 "use client";
 
+import { ArrowRight, ArrowLeft } from "lucide-react";
+
 import { useEffect, useRef } from "react";
 import { formatNumber } from "@/lib/format";
 import type { InvestigationQuiz } from "@/hooks/use-investigation-quiz";
@@ -50,7 +52,7 @@ export function QuizResults({
                 <h4>{quiz.questions[index].question}</h4>
                 <p>Em đã chọn: {quiz.questions[index].options[quiz.answers[index]!]}</p>
                 <button className="secondary compact" onClick={() => quiz.editAnswers(index)}>
-                  Xem lại câu {index + 1} →
+                  Xem lại câu {index + 1} <ArrowRight className="inline-icon" aria-hidden="true" />
                 </button>
               </article>
             ))}
@@ -59,7 +61,7 @@ export function QuizResults({
       )}
       <div className="results-actions">
         <button className="primary" onClick={onReviewExperiments}>
-          ← Tự kiểm chứng bằng thí nghiệm
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Tự kiểm chứng bằng thí nghiệm
         </button>
         <button className="secondary" onClick={() => quiz.editAnswers()}>
           Điều chỉnh đáp án

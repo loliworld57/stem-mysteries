@@ -1,3 +1,4 @@
+import { Check, Circle } from "lucide-react";
 import type { InvestigationQuiz } from "@/hooks/use-investigation-quiz";
 
 export function QuestionNavigator({ quiz }: { quiz: InvestigationQuiz }) {
@@ -17,13 +18,23 @@ export function QuestionNavigator({ quiz }: { quiz: InvestigationQuiz }) {
             aria-label={`Câu ${index + 1}: ${question.topic}, ${quiz.answers[index] === null ? "chưa trả lời" : "đã trả lời"}`}
           >
             {index + 1}
-            <span aria-hidden="true">{quiz.answers[index] === null ? "○" : "✓"}</span>
+            <span aria-hidden="true">
+              {quiz.answers[index] === null ? (
+                <Circle className="inline-icon" />
+              ) : (
+                <Check className="inline-icon" />
+              )}
+            </span>
           </button>
         ))}
       </nav>
       <div className="quiz-legend">
-        <span>✓ Đã chọn đáp án</span>
-        <span>○ Chưa trả lời</span>
+        <span>
+          <Check className="inline-icon" aria-hidden="true" /> Đã chọn đáp án
+        </span>
+        <span>
+          <Circle className="inline-icon" aria-hidden="true" /> Chưa trả lời
+        </span>
       </div>
       <p className="quiz-guidance">
         Em có thể chọn bất kỳ câu nào và đổi đáp án trước khi nộp bài.

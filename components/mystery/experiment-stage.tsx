@@ -1,3 +1,4 @@
+import { ArrowRight, ArrowLeft } from "lucide-react";
 import type { StageProps } from "./types";
 import type { BrakingSimulation } from "@/hooks/use-braking-simulation";
 import { BrakingTrack } from "./braking-track";
@@ -24,14 +25,14 @@ export function ExperimentStage({ headingRef, onNavigate, simulation }: Experime
       <ExperimentNotebook trials={simulation.trials} comparison={simulation.comparison} />
       <div className="actions">
         <button className="secondary" disabled={simulation.running} onClick={() => onNavigate(1)}>
-          ← Xem lại manh mối
+          <ArrowLeft className="inline-icon" aria-hidden="true" /> Xem lại manh mối
         </button>
         <button
           className="primary"
           disabled={!simulation.comparison || simulation.running}
           onClick={() => onNavigate(3)}
         >
-          Đưa ra giả thuyết →
+          Đưa ra giả thuyết <ArrowRight className="inline-icon" aria-hidden="true" />
         </button>
       </div>
     </section>
