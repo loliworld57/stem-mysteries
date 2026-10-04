@@ -1,4 +1,5 @@
-import { isFinalArgumentReady, changedDesignFactors } from "@/lib/challenge-state";
+import { checkRequiredFields } from "./submit-feedback";
+import { hasMeaningfulReason, changedDesignFactors } from "@/lib/challenge-state";
 import type { ChallengeAction } from "@/lib/challenge-state";
 import type { ChallengeState, FinalDesignArgument } from "@/lib/challenge-types";
 import { AttemptEvidence } from "./attempt-evidence";
@@ -78,12 +79,14 @@ export function FinalDesign({
       )}
       <h2>Bảo vệ phương án</h2>
       <p id="argument-help">
-        Mỗi câu trả lời cần một nhận xét ngắn có ít nhất 10 ký tự. Số liệu được hiển thị để nhóm
-        tham khảo; không cần chép lại tất cả.
+        Mỗi phần chỉ cần một ý ngắn; không cần viết thành đoạn dài. Gợi ý: chọn số liệu, liên hệ với
+        vùng 10–30 cm và so sánh một lần thử khác. Số liệu được hiển thị để nhóm tham khảo; không
+        cần chép lại tất cả.
       </p>
       <label htmlFor="final-claim">1. Lựa chọn — Nhóm đề xuất phương án này vì:</label>
       <textarea
         id="final-claim"
+        placeholder="Gợi ý: nêu ngắn gọn điểm khiến nhóm chọn phương án này."
         rows={3}
         maxLength={2000}
         value={argument.claim}
@@ -117,6 +120,7 @@ export function FinalDesign({
       </label>
       <textarea
         id="final-evidence"
+        placeholder="Gợi ý: chọn lần thử ở trên, rồi nêu số liệu nhóm chú ý."
         rows={3}
         maxLength={2000}
         value={argument.evidenceReasoning}
@@ -129,6 +133,7 @@ export function FinalDesign({
       </label>
       <textarea
         id="final-reasoning"
+        placeholder="Gợi ý: số liệu đó liên quan thế nào đến vùng dừng 10–30 cm?"
         rows={3}
         maxLength={2000}
         value={argument.reasoning}
@@ -152,6 +157,7 @@ export function FinalDesign({
       </label>
       <textarea
         id="final-comparison"
+        placeholder="Gợi ý: so sánh một yếu tố thiết kế và kết quả giữa hai lần thử."
         rows={3}
         maxLength={2000}
         value={argument.comparisonReasoning}
@@ -160,8 +166,35 @@ export function FinalDesign({
       />
       <button
         className="primary"
-        disabled={!isFinalArgumentReady(state)}
-        onClick={() => dispatch({ type: "submit-final" })}
+        onClick={() => {
+          if (
+            checkRequiredFields([
+              {
+                valid: Boolean(selected?.completed),
+                message: "Chọn một lần thử làm phương án đề xuất.",
+                selector: 'input[name="final-attempt"]',
+              },
+              {
+                valid: evidence.length > 0,
+                message: "Chọn ít nhất một lần thử làm bằng chứng.",
+                selector: '.challenge-final input[type="checkbox"]',
+              },
+              ...(
+                [
+                  ["claim", "final-claim", "Lựa chọn"],
+                  ["evidenceReasoning", "final-evidence", "Nhận xét số liệu"],
+                  ["reasoning", "final-reasoning", "Giải thích"],
+                  ["comparisonReasoning", "final-comparison", "So sánh phương án"],
+                ] as const
+              ).map(([field, id, label]) => ({
+                valid: hasMeaningfulReason(argument[field]),
+                message: `${label}: ghi một ý ngắn của nhóm.`,
+                selector: `#${id}`,
+              })),
+            ])
+          )
+            dispatch({ type: "submit-final" });
+        }}
       >
         Nộp phương án đề xuất
       </button>

@@ -1,3 +1,4 @@
+import { checkRequiredFields } from "./submit-feedback";
 import { improvementFactors } from "@/lib/challenge-config";
 import { hasMeaningfulReason } from "@/lib/challenge-state";
 import type { ChallengeAction } from "@/lib/challenge-state";
@@ -36,6 +37,7 @@ export function IterationReflection({
       <label htmlFor="improvement-reason">Vì sao nhóm em muốn thay đổi như vậy?</label>
       <textarea
         id="improvement-reason"
+        placeholder="Gợi ý: nhóm muốn kiểm tra điều gì khi đổi yếu tố này hoặc giữ nguyên?"
         rows={3}
         maxLength={2000}
         value={decision.explanation}
@@ -48,12 +50,27 @@ export function IterationReflection({
         }
       />
       <p id="improvement-help">
-        Viết một nhận xét ngắn có ít nhất 10 ký tự, liên hệ với bằng chứng của lần thử vừa rồi.
+        Chỉ cần ghi một ý ngắn. Gợi ý: nhóm muốn kiểm tra điều gì từ kết quả vừa rồi?
       </p>
       <button
         className="primary"
-        disabled={decision.factor === null || !hasMeaningfulReason(decision.explanation)}
-        onClick={() => dispatch({ type: "next" })}
+        onClick={() => {
+          if (
+            checkRequiredFields([
+              {
+                valid: decision.factor !== null,
+                message: "Chọn yếu tố muốn thay đổi hoặc giữ nguyên để kiểm tra lại.",
+                selector: 'input[name="improvement-factor"]',
+              },
+              {
+                valid: hasMeaningfulReason(decision.explanation),
+                message: "Ghi ngắn gọn vì sao nhóm chọn thay đổi hoặc thử lại.",
+                selector: "#improvement-reason",
+              },
+            ])
+          )
+            dispatch({ type: "next" });
+        }}
       >
         Lưu kế hoạch và thiết kế tiếp
       </button>

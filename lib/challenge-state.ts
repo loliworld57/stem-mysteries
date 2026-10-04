@@ -79,7 +79,7 @@ export function isValidDesign(design: ChallengeDesign) {
 }
 
 export function hasMeaningfulReason(text: string) {
-  return text.trim().length >= 10 && /\p{L}/u.test(text);
+  return /[\p{L}\p{N}]/u.test(text.trim());
 }
 
 export function changedDesignFactors(previous: ChallengeDesign, current: ChallengeDesign) {

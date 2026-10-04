@@ -1,3 +1,4 @@
+import { checkRequiredFields } from "./submit-feedback";
 import { formatNumber } from "@/lib/format";
 import { challengeConfig, statusLabels } from "@/lib/challenge-config";
 import { hasMeaningfulReason } from "@/lib/challenge-state";
@@ -16,7 +17,7 @@ export function ExperimentResult({
   const evidence = attempt.evidence;
   return (
     <section
-      className="challenge-panel challenge-controls"
+      className="challenge-panel challenge-controls challenge-result-reveal"
       aria-labelledby="experiment-result-title"
     >
       <h2 id="experiment-result-title">Bằng chứng từ lần thử {count}</h2>
@@ -26,19 +27,19 @@ export function ExperimentResult({
       </p>
       <dl className="challenge-evidence">
         <div>
-          <dt>Vận tốc tại chân dốc</dt>
-          <dd>
-            {evidence.reachesRampBottom
-              ? `${formatNumber(evidence.bottomSpeedKmh, 1)} km/h`
-              : "Không đến chân dốc"}
-          </dd>
-        </div>
-        <div>
           <dt>Quãng đường dừng tính từ chân dốc</dt>
           <dd>
             {evidence.reachesRampBottom
               ? `${formatNumber(evidence.stoppingDistanceCm, 1)} cm`
               : "Chưa đi xuống dốc"}
+          </dd>
+        </div>
+        <div>
+          <dt>Vận tốc tại chân dốc</dt>
+          <dd>
+            {evidence.reachesRampBottom
+              ? `${formatNumber(evidence.bottomSpeedKmh, 1)} km/h`
+              : "Không đến chân dốc"}
           </dd>
         </div>
         <div>
@@ -55,7 +56,8 @@ export function ExperimentResult({
         </div>
       </dl>
       <p>Số liệu hiển thị được làm tròn; tiêu chí dùng giá trị chưa làm tròn.</p>
-      <p>
+      <h3 className="challenge-prediction-heading">Dự đoán và bằng chứng</h3>
+      <p className="challenge-prediction-summary">
         Dự đoán của nhóm: {attempt.prediction.safe ? "Có" : "Không"}.{" "}
         {attempt.prediction.explanation}
       </p>
@@ -64,6 +66,7 @@ export function ExperimentResult({
       </label>
       <textarea
         id="result-analysis"
+        placeholder="Gợi ý: đối chiếu quãng đường dừng với vùng 10–30 cm."
         rows={3}
         maxLength={2000}
         value={attempt.analysis}
@@ -71,7 +74,8 @@ export function ExperimentResult({
         onChange={(event) => dispatch({ type: "analysis", text: event.target.value })}
       />
       <p id="analysis-help">
-        Viết nhận xét ngắn có ít nhất 10 ký tự. Liên hệ số liệu với dự đoán và tiêu chí thiết kế.
+        Chỉ cần ghi một ý ngắn. Gợi ý: xe dừng ở đâu so với vùng 10–30 cm? Kết quả có giống dự đoán
+        không?
       </p>
       {evidence.status === "success" && (
         <p>
@@ -87,8 +91,19 @@ export function ExperimentResult({
           </p>
           <button
             className="primary"
-            disabled={!hasMeaningfulReason(attempt.analysis)}
-            onClick={() => dispatch({ type: "improve" })}
+            onClick={() => {
+              if (
+                checkRequiredFields([
+                  {
+                    valid: hasMeaningfulReason(attempt.analysis),
+                    message:
+                      "Ghi một ý nhận xét về kết quả, chẳng hạn vị trí xe dừng so với vùng an toàn.",
+                    selector: "#result-analysis",
+                  },
+                ])
+              )
+                dispatch({ type: "improve" });
+            }}
           >
             Lập kế hoạch cải tiến →
           </button>
@@ -101,8 +116,19 @@ export function ExperimentResult({
           </p>
           <button
             className="primary"
-            disabled={!hasMeaningfulReason(attempt.analysis)}
-            onClick={() => dispatch({ type: "review" })}
+            onClick={() => {
+              if (
+                checkRequiredFields([
+                  {
+                    valid: hasMeaningfulReason(attempt.analysis),
+                    message:
+                      "Ghi một ý nhận xét về kết quả, chẳng hạn vị trí xe dừng so với vùng an toàn.",
+                    selector: "#result-analysis",
+                  },
+                ])
+              )
+                dispatch({ type: "review" });
+            }}
           >
             Hoàn thiện phương án →
           </button>

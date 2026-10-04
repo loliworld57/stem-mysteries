@@ -69,7 +69,7 @@ test("successful trials continue through analysis and improvement, with no sixth
 test("analysis and structured improvement are required, prior snapshots remain immutable", () => {
   let state = challengeReducer(run(begin()), { type: "finish" });
   assert.strictEqual(challengeReducer(state, { type: "improve" }), state);
-  state = challengeReducer(state, { type: "analysis", text: "ok" });
+  state = challengeReducer(state, { type: "analysis", text: "   " });
   assert.strictEqual(challengeReducer(state, { type: "improve" }), state);
   state = challengeReducer(state, { type: "analysis", text: reason });
   state = challengeReducer(state, { type: "improve" });

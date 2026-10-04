@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { Toaster } from "sonner";
 import { useEffect, useRef } from "react";
 import { useEngineeringChallenge } from "@/hooks/use-engineering-challenge";
 import { ChallengeCriteria } from "./challenge-criteria";
@@ -38,6 +39,13 @@ export function EngineeringChallenge() {
 
   return (
     <div className="engineering-challenge">
+      <Toaster
+        position="top-center"
+        theme="light"
+        closeButton
+        containerAriaLabel="Thông báo"
+        toastOptions={{ className: "challenge-toast", closeButtonAriaLabel: "Đóng thông báo" }}
+      />
       <Link className="back-to-home" href="/#thu-thach">
         ← Về danh sách thử thách STEM
       </Link>
@@ -63,7 +71,7 @@ export function EngineeringChallenge() {
         }
       />
       <div className="challenge-layout">
-        <div>
+        <div className="challenge-workspace">
           {!started ? (
             <section className="challenge-panel" aria-labelledby="challenge-context-title">
               <h2 id="challenge-context-title">Làm thế nào để xe đến đích và dừng an toàn?</h2>
@@ -115,7 +123,7 @@ export function EngineeringChallenge() {
                     Chọn độ cao, góc nghiêng và bề mặt. Nhóm muốn tìm hiểu điều gì từ phương án này?
                   </p>
                   <p>
-                    Lần thử{" "}
+                    {challenge.stage === "design" ? "Chuẩn bị lần thử" : "Lần thử"}{" "}
                     {Math.min(
                       challengeConfig.maxAttempts,
                       challenge.attempts.length +
@@ -123,32 +131,54 @@ export function EngineeringChallenge() {
                     )}{" "}
                     / {challengeConfig.maxAttempts}
                   </p>
-                  <RampPreview
-                    design={challenge.design}
-                    evidence={
-                      ["testing", "results", "improvement", "review"].includes(challenge.stage)
-                        ? challenge.currentAttempt?.evidence
-                        : undefined
-                    }
-                    elapsed={challenge.elapsed}
-                  />
+                  <div
+                    className={`challenge-apparatus-layout${challenge.stage === "design" ? " is-designing" : ""}`}
+                  >
+                    {challenge.stage === "design" && (
+                      <DesignControls design={challenge.design} onChange={challenge.changeDesign} />
+                    )}
+                    <RampPreview
+                      key={challenge.currentAttempt?.id ?? "design"}
+                      design={challenge.design}
+                      evidence={
+                        ["testing", "results", "improvement"].includes(challenge.stage)
+                          ? challenge.currentAttempt?.evidence
+                          : undefined
+                      }
+                      testing={challenge.stage === "testing"}
+                      onComplete={challenge.finishExperiment}
+                    />
+                  </div>
                   {challenge.stage === "design" && (
                     <>
-                      <DesignControls design={challenge.design} onChange={challenge.changeDesign} />
                       {challenge.currentAttempt && (
                         <DesignComparison
                           previous={challenge.currentAttempt.design}
                           current={challenge.design}
                         />
                       )}
-                      <button
-                        className="primary"
-                        onClick={() => challenge.dispatch({ type: "predict" })}
-                      >
-                        Tiếp tục dự đoán →
-                      </button>
+                      <div className="challenge-next-action">
+                        <button
+                          className="primary"
+                          onClick={() => challenge.dispatch({ type: "predict" })}
+                        >
+                          Tiếp tục dự đoán →
+                        </button>
+                      </div>
                     </>
                   )}
+                  {["prediction", "testing"].includes(challenge.stage) &&
+                    challenge.prediction.safe !== null && (
+                      <aside className="challenge-prediction-summary" aria-label="Dự đoán của nhóm">
+                        <strong>Dự đoán của nhóm</strong>
+                        <p>
+                          {challenge.prediction.safe
+                            ? "Xe sẽ dừng trong vùng an toàn."
+                            : "Xe sẽ không dừng trong vùng an toàn."}
+                        </p>
+                        <p className="student-reason">{challenge.prediction.explanation}</p>
+                      </aside>
+                    )}
                   {challenge.stage === "prediction" && (
                     <PredictionPanel
                       prediction={challenge.prediction}
@@ -202,7 +232,7 @@ export function EngineeringChallenge() {
           />
         </>
       )}
-      <p role="status">
+      <p className="challenge-storage-status" role="status">
         {challenge.storageStatus === "unavailable"
           ? "Không thể lưu trên trình duyệt này. Tiến trình chỉ được giữ trong phiên hiện tại; tải lại trang có thể mất dữ liệu."
           : challenge.storageStatus === "invalid"

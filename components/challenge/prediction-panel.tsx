@@ -1,3 +1,4 @@
+import { checkRequiredFields } from "./submit-feedback";
 import type { ChallengeState } from "@/lib/challenge-types";
 import type { ChallengeAction } from "@/lib/challenge-state";
 
@@ -8,7 +9,6 @@ export function PredictionPanel({
   prediction: ChallengeState["prediction"];
   dispatch: (action: ChallengeAction) => void;
 }) {
-  const ready = prediction.safe !== null && prediction.explanation.trim().length > 0;
   return (
     <section className="challenge-panel challenge-controls" aria-labelledby="prediction-title">
       <h2 id="prediction-title">Dự đoán trước khi thử nghiệm</h2>
@@ -31,6 +31,7 @@ export function PredictionPanel({
       <label htmlFor="prediction-reason">Vì sao em dự đoán như vậy?</label>
       <textarea
         id="prediction-reason"
+        placeholder="Gợi ý: nhóm nghĩ xe sẽ dừng ở đâu? Dựa vào yếu tố nào?"
         rows={3}
         maxLength={2000}
         value={prediction.explanation}
@@ -47,7 +48,26 @@ export function PredictionPanel({
         <button className="secondary" onClick={() => dispatch({ type: "edit" })}>
           ← Xem lại thiết kế
         </button>
-        <button className="primary" disabled={!ready} onClick={() => dispatch({ type: "run" })}>
+        <button
+          className="primary"
+          onClick={() => {
+            if (
+              checkRequiredFields([
+                {
+                  valid: prediction.safe !== null,
+                  message: "Chọn Có hoặc Không cho dự đoán.",
+                  selector: 'input[name="prediction"]',
+                },
+                {
+                  valid: prediction.explanation.trim().length > 0,
+                  message: "Giải thích vì sao nhóm dự đoán như vậy.",
+                  selector: "#prediction-reason",
+                },
+              ])
+            )
+              dispatch({ type: "run" });
+          }}
+        >
           Thử nghiệm thiết kế
         </button>
       </div>

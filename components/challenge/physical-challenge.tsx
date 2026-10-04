@@ -1,6 +1,7 @@
+import { checkRequiredFields } from "./submit-feedback";
 import type { ChallengeAttempt, PhysicalValidation } from "@/lib/challenge-types";
 import type { ChallengeAction } from "@/lib/challenge-state";
-import { hasMeaningfulReason, isPhysicalReady } from "@/lib/challenge-state";
+import { hasMeaningfulReason } from "@/lib/challenge-state";
 import { formatNumber } from "@/lib/format";
 
 export function PhysicalChallenge({
@@ -38,6 +39,7 @@ export function PhysicalChallenge({
       </label>
       <textarea
         id="physical-prediction"
+        placeholder="Gợi ý: nhóm nghĩ kết quả sẽ giống hay khác? Vì sao?"
         rows={3}
         maxLength={2000}
         value={validation.prediction}
@@ -47,8 +49,18 @@ export function PhysicalChallenge({
       {!validation.predictionSubmitted && (
         <button
           className="secondary"
-          disabled={!hasMeaningfulReason(validation.prediction)}
-          onClick={() => dispatch({ type: "submit-physical-prediction" })}
+          onClick={() => {
+            if (
+              checkRequiredFields([
+                {
+                  valid: hasMeaningfulReason(validation.prediction),
+                  message: "Ghi ngắn gọn dự đoán về mô hình thật và lí do.",
+                  selector: "#physical-prediction",
+                },
+              ])
+            )
+              dispatch({ type: "submit-physical-prediction" });
+          }}
         >
           Lưu dự đoán trước khi đo
         </button>
@@ -86,6 +98,7 @@ export function PhysicalChallenge({
           <label htmlFor="physical-comparison">Hai kết quả giống và khác nhau như thế nào?</label>
           <textarea
             id="physical-comparison"
+            placeholder="Gợi ý: hai quãng đường dừng chênh lệch bao nhiêu, hoặc giống nhau ở đâu?"
             rows={3}
             maxLength={2000}
             value={validation.comparison}
@@ -97,18 +110,45 @@ export function PhysicalChallenge({
           </label>
           <textarea
             id="physical-limitations"
+            placeholder="Gợi ý: điều kiện nào khi làm mô hình thật có thể khác lúc mô phỏng?"
             rows={3}
             maxLength={2000}
             value={validation.modelLimitationsReasoning}
             disabled={validation.submitted}
             onChange={(event) => update({ modelLimitationsReasoning: event.target.value })}
           />
-          <p>Ghi nhận xét ngắn, ít nhất 10 ký tự cho mỗi câu giải thích.</p>
+          <p>
+            Mỗi phần chỉ cần một ý ngắn. Gợi ý: đối chiếu hai số đo và nêu điều nhóm muốn kiểm tra
+            thêm.
+          </p>
           {!validation.submitted ? (
             <button
               className="primary"
-              disabled={!isPhysicalReady(validation)}
-              onClick={() => dispatch({ type: "submit-physical" })}
+              onClick={() => {
+                if (
+                  checkRequiredFields([
+                    {
+                      valid:
+                        validation.measuredStoppingDistanceCm !== null &&
+                        Number.isFinite(validation.measuredStoppingDistanceCm) &&
+                        validation.measuredStoppingDistanceCm >= 0,
+                      message: "Nhập quãng đường dừng đo được bằng cm, từ 0 trở lên.",
+                      selector: "#physical-distance",
+                    },
+                    {
+                      valid: hasMeaningfulReason(validation.comparison),
+                      message: "Ghi một ý về điểm giống hoặc khác giữa hai kết quả.",
+                      selector: "#physical-comparison",
+                    },
+                    {
+                      valid: hasMeaningfulReason(validation.modelLimitationsReasoning),
+                      message: "Ghi một ý về điều có thể khiến mô hình thật khác mô phỏng.",
+                      selector: "#physical-limitations",
+                    },
+                  ])
+                )
+                  dispatch({ type: "submit-physical" });
+              }}
             >
               Lưu so sánh mô hình thật
             </button>
