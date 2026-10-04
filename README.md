@@ -20,6 +20,25 @@ Website giáo dục tiếng Việt dành cho học sinh lớp 9, kết hợp mô
 - Bảng kết quả chỉ nêu điểm và câu sai. Học sinh quay lại thí nghiệm để tự kiểm chứng.
 - Vận tốc hiển thị bằng km/h, năng lượng bằng J; định dạng số theo tiếng Việt.
 
+### Thử thách STEM — Hoàn thiện Challenge 01
+
+- Trang chủ phân biệt **Vấn đề khám phá** (tìm hiểu hiện tượng) và **Thử thách STEM** (thiết kế giải pháp).
+- **Thử thách STEM 01 — Thiết kế đường dốc an toàn** tại `/thu-thach/duong-doc-an-toan`.
+- Nhận tình huống, xem tiêu chí và thiết kế bằng độ cao 20–60 cm, góc nghiêng 10–40°, bề mặt Nhẵn / Trung bình / Nhám.
+- Hình dốc cập nhật theo thiết kế, cùng tỉ lệ hai trục. Vùng dừng an toàn: 10–30 cm tính từ chân dốc; tối đa 5 lần thử chính thức.
+- Chọn dự đoán Có / Không và giải thích trước mỗi lần thử. Đổi thiết kế sẽ xóa dự đoán cũ. Mô phỏng dùng cùng mô hình với số liệu kết quả và bỏ chuyển động khi bật giảm chuyển động.
+- Vận tốc là bằng chứng để phân tích, **không phải tiêu chí đạt yêu cầu**. Kết quả hiển thị vận tốc tại chân dốc, quãng đường dừng, thế năng ban đầu và động năng tại chân dốc.
+- Sổ tay kỹ sư tự ghi thí nghiệm hoàn thành, gồm thiết kế, dự đoán, số liệu, phân tích và kế hoạch cải tiến. Thẻ kết quả responsive giúp so sánh các lần thử; bảng thiết kế mới đánh dấu yếu tố thay đổi so với lần trước. Không suy ra quan hệ nhân quả khi đổi nhiều yếu tố.
+- Biểu đồ quãng đường dừng dùng chung thang 0–60 cm, đánh dấu vùng 10–30 cm. Giá trị vượt phạm vi có mũi tên và số liệu thật; xe chưa đến chân dốc không được vẽ như giá trị 0 cm. Số liệu hiển thị một chữ số thập phân theo tiếng Việt, mô hình và tiêu chí giữ độ chính xác nội bộ.
+- Sau lần 1–4, nhóm phải phân tích số liệu rồi chọn yếu tố cải tiến (hoặc giữ nguyên để kiểm tra lại) và giải thích trước khi thiết kế tiếp. Nhận xét ngắn cần ít nhất 10 ký tự có chữ; đây là kiểm tra nội dung tối thiểu, không chấm đúng/sai. Thiết kế đạt yêu cầu vẫn được tiếp tục thử. Sau lần 5, chỉ phân tích và xem lại bằng chứng; không có lần thử thứ 6 hoặc yêu cầu kế hoạch cải tiến nữa.
+- Sau lần thử thứ 5 và phân tích, nhóm xem lại sổ tay, tự chọn bất kỳ phương án đã thử (kể cả chưa đạt), chọn lần thử làm bằng chứng và viết lựa chọn, nhận xét số liệu, giải thích và so sánh. Không tự chọn phương án tốt nhất, chấm điểm hoặc đánh giá đúng/sai bài viết. Phương án đã nộp được giữ nguyên cùng bản tổng kết.
+- Năm câu suy ngẫm có thể lưu từng phần. Hoàn thành phần trực tuyến khi đã nộp phương án và ghi đủ năm nhận xét; vẫn xem được sổ tay và phương án. Sửa suy ngẫm sau hoàn thành mở lại bước suy ngẫm để nhóm xác nhận lại.
+- Hoạt động mô hình thật dùng vật liệu lớp học, lưu dự đoán trước khi nhập số đo, so sánh với phương án đã chọn và giải thích khác biệt. Ghi nhận này độc lập với năm lần thử mô phỏng và không bắt buộc để hoàn thành phần trực tuyến. Ghi chú giới hạn mô hình chỉ hiện trong phần kiểm chứng thật sau khi nộp nhận xét.
+- Tiến trình được lưu trên trình duyệt này qua localStorage phiên bản 2, giữ khóa `stem-mysteries:safe-ramp:v1` để nâng cấp dữ liệu phiên bản 1 tại chỗ: thiết kế nháp, dự đoán, giai đoạn, các lần thử, phân tích, cải tiến, phương án đề xuất, bằng chứng, suy ngẫm và kiểm chứng thật. Nâng cấp giữ nguyên sổ tay và không tự chọn phương án. Khi tải lại giữa hoạt ảnh, kết quả đã tính được khôi phục để phân tích mà không chạy lại hoặc ghi trùng. Dữ liệu không hợp lệ/phiên bản không hỗ trợ mở chu trình mới và thông báo; khi trình duyệt từ chối lưu, bài vẫn chạy trong bộ nhớ và thông báo giới hạn lưu trữ. Không tải lên máy chủ hoặc đồng bộ đám mây.
+- Nút bắt đầu lại ở cuối trang yêu cầu xác nhận khi đã có lần thử, xóa toàn bộ dữ liệu chu trình (cả phương án, suy ngẫm và kiểm chứng thật) và không hoạt động khi đang thử nghiệm. Sau hoàn thành, nút có nhãn “Bắt đầu chu trình thiết kế mới”. Không ảnh hưởng hai vấn đề khám phá.
+- Cấu hình: `lib/challenge-config.ts`; kiểu dữ liệu và reducer: `lib/challenge-types.ts`, `lib/challenge-state.ts`; mô hình dốc: `lib/challenge-physics.ts`; kiểm tra và lưu dữ liệu: `lib/challenge-storage.ts`; trạng thái giao diện: `hooks/use-engineering-challenge.ts`.
+- Mô hình động lực học: `L = h / sin(θ)`, `a = g(sin(θ) − μcos(θ))`, `v² = 2aL` khi `a > 0`, `s = v²/(2μg)`. Dùng g = 10 m/s²; μ minh họa là 0,10 / 0,20 / 0,35, không phải số đo vật liệu thật. Bỏ qua năng lượng quay, lực cản không khí và tổn hao ở chân dốc. Khi gia tốc không dương, xe đứng yên; số liệu tại chân dốc được ghi là không đến chân dốc. Khi xe vượt khung hình, chỉ báo cho biết xe đi tiếp ngoài khung, số liệu vẫn ghi toàn bộ quãng đường.
+
 ### Bộ UI E-learning
 
 - `CourseCard`: ảnh Next Image, danh mục, giảng viên, điểm đánh giá, số học viên và hiệu ứng nhấc thẻ khi hover.
@@ -176,3 +195,9 @@ Xem [hướng dẫn mô hình STEM](docs/stem-guide.md) để biết công thứ
 ## Tài liệu tham khảo
 
 [Next.js Image](https://nextjs.org/docs/app/api-reference/components/image) · [Motion](https://motion.dev/docs/react-animate-presence) · [Tailwind dark mode](https://tailwindcss.com/docs/dark-mode) · [next-themes](https://github.com/pacocoursey/next-themes) · [Sonner](https://github.com/emilkowalski/sonner)
+
+## Đăng ký nội dung và lưu trạng thái
+
+Vấn đề khám phá và Thử thách STEM là hai kiểu riêng trong `lib/catalog-types.ts`. Thêm ID và định nghĩa vào `lib/problem-catalog.ts` hoặc `lib/challenge-catalog.ts`, rồi thêm mục vào danh sách theo thứ tự hiển thị. Tạo route tĩnh và ghép component riêng; route đọc metadata từ định nghĩa. Challenge liên kết các Problem qua `relatedProblemIds`. Hình minh họa vẫn được ghép rõ ràng trong component trang chủ.
+
+`lib/browser-state-storage.ts` chỉ quản lý đọc/ghi đồng bộ theo key và trạng thái saved/invalid/unavailable. `lib/challenge-storage.ts` vẫn sở hữu key Safe Ramp, codec, kiểm tra dữ liệu/vật lí và migration phiên bản 1 → 2. Hook giữ thứ tự khôi phục trước khi lưu và tiếp tục bằng bộ nhớ khi trình duyệt từ chối lưu. Reset ghi trạng thái sạch theo schema hiện tại.

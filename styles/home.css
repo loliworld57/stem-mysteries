@@ -1,6 +1,33 @@
 .home-page {
   isolation: isolate;
 }
+.home-challenge-entry {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-left: 6px solid var(--accent);
+  border-radius: 16px;
+  background: var(--soft);
+}
+.home-challenge-entry h3 {
+  margin: 12px 0;
+  color: var(--heading);
+  font-size: 28px;
+  line-height: 1.4;
+}
+.home-challenge-entry .primary {
+  flex-shrink: 0;
+}
+@media (max-width: 760px) {
+  .home-challenge-entry {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 20px;
+  }
+}
 .home-hero {
   position: relative;
   display: grid;

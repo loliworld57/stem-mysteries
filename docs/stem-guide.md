@@ -1,5 +1,20 @@
 # STEM Mysteries — Chiếc xe trượt xa
 
+## Challenge 01 — Safe ramp reference implementation
+
+Problems (`/kham-pha/...`) construct scientific understanding; Challenges apply that understanding to engineering design. Challenge 01 lives at `/thu-thach/duong-doc-an-toan` and keeps the two Problems' models and quizzes independent.
+
+- Workflow: design → prediction and explanation → experiment → evidence analysis → improvement plan → next design. Five official trials; an early success does not terminate the cycle. After trial five: notebook review → tested-design selection → claim/evidence/reasoning/comparison → five reflections → completion. Physical validation is optional and never adds a simulation trial.
+- Inputs: height 20–60 cm, angle 10–40°, surfaces smooth/medium/rough with illustrative friction coefficients 0.10/0.20/0.35. The selected coefficient applies to the ramp and horizontal stopping area.
+- Model: mass 2 kg, gravity 10 m/s²; internally convert cm to m. `L = h/sin(theta)`, `a = g(sin(theta) - mu*cos(theta))`, `v² = 2aL`, `s = v²/(2mu*g)`. If acceleration is nonpositive (within numerical tolerance), the model vehicle remains at rest. Ignore wheel rotation, air resistance and transition losses. These are teaching coefficients, not measured material properties.
+- Success requires reaching the ramp bottom and stopping 10–30 cm from it (inclusive). Bottom speed is evidence, never an independent pass criterion. Display km/h, cm, degrees and J with Vietnamese formatting and one decimal; classification uses unrounded values.
+- Notebook chart: common linear 0–60 cm scale, shaded safety zone, explicit overflow arrow and actual distance. A vehicle that never reaches the bottom has no horizontal-stop marker. Comparing multiple changed variables never implies a unique cause.
+- State/physics/configuration remain in their existing `lib/challenge-*` modules, animation/persistence in `useEngineeringChallenge`, and scoped UI in `components/challenge`. Do not generalize this reference implementation into a generic engine.
+- Persistence: schema version 2 under `stem-mysteries:safe-ramp:v1`; version 1 is migrated in place, retaining attempts. Persist drafts, arguments, reflections and separate physical validation. Restore interrupted animation to its calculated result without a new trial. Invalid/unsupported data starts a clean cycle with feedback; denied storage falls back to memory. No server or cloud storage.
+- Reset uses the in-app modal, confirms clearing an active cycle, and is disabled during animation. Reflection/completion retains records. Real prototype limitations are discussed after students submit their physical comparison; written reasoning is never automatically graded.
+
+Verification covers the complete 3,813 allowed input combinations, safe-zone boundaries, near-zero acceleration, continuous motion, chart overflow, state transitions, persistence, migration and reset. Responsive CSS targets small/large mobile, tablet and desktop widths and inherits the site presentation mode. No additional dependencies are needed.
+
 Website dùng theme xanh dương cố định (`color-scheme: only light`), không đổi theo chế độ sáng/tối của hệ thống.
 
 Bài học tương tác cho học sinh lớp 9 về ma sát, động năng, thế năng trọng trường và cơ năng. Giao diện tiếng Việt, chữ lớn, có chế độ trình chiếu.
@@ -78,3 +93,9 @@ npm test
 npm run format:check
 npm run build
 ```
+
+## Đăng ký nội dung và lưu trạng thái
+
+Vấn đề khám phá và Thử thách STEM là hai kiểu riêng trong `lib/catalog-types.ts`. Thêm ID và định nghĩa vào `lib/problem-catalog.ts` hoặc `lib/challenge-catalog.ts`, rồi thêm mục vào danh sách theo thứ tự hiển thị. Tạo route tĩnh và ghép component riêng; route đọc metadata từ định nghĩa. Challenge liên kết các Problem qua `relatedProblemIds`. Hình minh họa vẫn được ghép rõ ràng trong component trang chủ.
+
+`lib/browser-state-storage.ts` chỉ quản lý đọc/ghi đồng bộ theo key và trạng thái saved/invalid/unavailable. `lib/challenge-storage.ts` vẫn sở hữu key Safe Ramp, codec, kiểm tra dữ liệu/vật lí và migration phiên bản 1 → 2. Hook giữ thứ tự khôi phục trước khi lưu và tiếp tục bằng bộ nhớ khi trình duyệt từ chối lưu. Reset ghi trạng thái sạch theo schema hiện tại.
