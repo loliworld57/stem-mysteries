@@ -29,7 +29,10 @@ export function ChallengeReflection({
         lưu.
       </p>
       {reflectionQuestions.map((question, index) => (
-        <div key={question}>
+        <details className="report-writing" key={question} open={index === 0}>
+          <summary>
+            {index + 1}. {question}
+          </summary>
           <label htmlFor={`reflection-${index}`}>
             {index + 1}. {question}
           </label>
@@ -42,7 +45,7 @@ export function ChallengeReflection({
             aria-describedby="reflection-help"
             onChange={(event) => dispatch({ type: "reflection", index, text: event.target.value })}
           />
-        </div>
+        </details>
       ))}
       {!completed && (
         <button

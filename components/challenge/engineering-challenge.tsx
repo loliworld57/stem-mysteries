@@ -17,9 +17,6 @@ import { IterationReflection } from "./iteration-reflection";
 import { EngineeringNotebook } from "./engineering-notebook";
 import { DesignComparison } from "./design-comparison";
 import { ChallengeReset } from "./challenge-reset";
-import { FinalDesign } from "./final-design";
-import { ChallengeReflection } from "./challenge-reflection";
-import { PhysicalChallenge } from "./physical-challenge";
 
 export function EngineeringChallenge() {
   const challenge = useEngineeringChallenge();
@@ -27,9 +24,6 @@ export function EngineeringChallenge() {
   const started = challenge.stage !== "intro";
   const previousStage = useRef(challenge.stage);
   const finalStage = ["review", "reflection", "completed"].includes(challenge.stage);
-  const selectedAttempt = challenge.attempts.find(
-    (attempt) => attempt.id === challenge.finalDesign.attemptId,
-  );
   useEffect(() => {
     if (started && !(previousStage.current === "completed" && challenge.stage === "reflection"))
       designHeading.current?.focus();
@@ -52,7 +46,7 @@ export function EngineeringChallenge() {
         <ArrowLeft className="inline-icon" aria-hidden="true" /> Về danh sách thử thách STEM
       </Link>
       <div className="case-label">THỬ THÁCH STEM 01</div>
-      <h1>Thiết kế đường dốc an toàn</h1>
+      <h3 className="bold">Thiết kế đường dốc an toàn</h3>
       <p className="intro">
         Vận dụng bằng chứng khoa học để thiết kế, kiểm chứng và cải tiến một giải pháp.
       </p>
@@ -218,22 +212,7 @@ export function EngineeringChallenge() {
         </div>
         <ChallengeCriteria />
       </div>
-      <EngineeringNotebook attempts={challenge.attempts} />
-      {finalStage && <FinalDesign state={challenge} dispatch={challenge.dispatch} />}
-      {challenge.finalDesign.submitted && selectedAttempt && (
-        <>
-          <ChallengeReflection
-            responses={challenge.reflections}
-            completed={challenge.stage === "completed"}
-            dispatch={challenge.dispatch}
-          />
-          <PhysicalChallenge
-            attempt={selectedAttempt}
-            validation={challenge.physicalValidation}
-            dispatch={challenge.dispatch}
-          />
-        </>
-      )}
+      <EngineeringNotebook state={challenge} dispatch={challenge.dispatch} />
       <p className="challenge-storage-status" role="status">
         {challenge.storageStatus === "unavailable"
           ? "Không thể lưu trên trình duyệt này. Tiến trình chỉ được giữ trong phiên hiện tại; tải lại trang có thể mất dữ liệu."

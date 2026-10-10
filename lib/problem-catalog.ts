@@ -6,7 +6,11 @@ export const slidingCarProblem = {
   description:
     "Các xe có cùng vận tốc và cùng phanh. Vì sao xe trên băng lại trượt xa hơn xe trên cao su?",
   href: "/kham-pha/chiec-xe-truot-xa",
-  topics: ["Ma sát", "Động năng", "Quãng đường phanh"],
+  topicIds: ["friction", "kinetic-energy", "braking-distance"],
+  subjectIds: ["physics"],
+  gradeIds: ["9"],
+  featured: true,
+  featuredOrder: 1,
   caseLabel: "BÍ ẨN 001 · VẬT LÍ LỚP 9",
   activitySummary: "1 thí nghiệm · 3 câu hỏi suy luận khoa học",
   metadata: {
@@ -22,7 +26,11 @@ export const rampEnergyProblem = {
   description:
     "Thả xe từ các độ cao khác nhau. Thế năng chuyển thành động năng thế nào và vận tốc ở chân dốc thay đổi ra sao?",
   href: "/kham-pha/nang-luong-tren-doc",
-  topics: ["Thế năng", "Động năng", "Bảo toàn cơ năng"],
+  topicIds: ["potential-energy", "kinetic-energy", "energy-conservation"],
+  subjectIds: ["physics"],
+  gradeIds: ["9"],
+  featured: true,
+  featuredOrder: 2,
   caseLabel: "BÍ ẨN 002 · VẬT LÍ LỚP 9",
   activitySummary: "1 thí nghiệm · 3 câu hỏi suy luận khoa học",
   metadata: {

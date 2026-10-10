@@ -7,7 +7,12 @@ export const safeRampChallenge = {
   title: "Thiết kế đường dốc an toàn",
   description: `Xe cần đến đích và dừng trong vùng ${challengeConfig.safeZoneMinCm}–${challengeConfig.safeZoneMaxCm} cm tính từ chân dốc. Nhóm em sẽ thiết kế phương án nào?`,
   href: "/thu-thach/duong-doc-an-toan",
-  topics: ["Ma sát", "Độ cao", "Chuyển hóa năng lượng"],
+  topicIds: ["friction", "height", "energy-transfer"],
+  subjectIds: ["physics"],
+  gradeIds: ["9"],
+  featured: true,
+  featuredOrder: 1,
+  activitySummary: `Tối đa ${challengeConfig.maxAttempts} lần thử`,
   caseLabel: "THỬ THÁCH STEM 01",
   relatedProblemIds: ["sliding-car", "ramp-energy"],
   metadata: {
