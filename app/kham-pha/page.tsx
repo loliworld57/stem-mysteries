@@ -8,7 +8,7 @@ export default function ExplorationCatalogPage() {
     <section className="home-section">
       <h1>Vấn đề khám phá</h1>
       <p>Quan sát, thử nghiệm và giải thích bằng bằng chứng khoa học.</p>
-      <CatalogBrowser entries={problemCatalog}>
+      <CatalogBrowser variant="mystery" entries={problemCatalog}>
         {problemCatalog.map((problem) => (
           <ProblemCard key={problem.id} problem={problem} />
         ))}

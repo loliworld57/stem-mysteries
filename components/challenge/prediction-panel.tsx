@@ -11,12 +11,19 @@ export function PredictionPanel({
   dispatch: (action: ChallengeAction) => void;
 }) {
   return (
-    <section className="challenge-panel challenge-controls" aria-labelledby="prediction-title">
+    <section
+      className="challenge-panel challenge-controls challenge-prediction-panel"
+      aria-labelledby="prediction-title"
+    >
       <h2 id="prediction-title">Dự đoán trước khi thử nghiệm</h2>
       <fieldset>
         <legend>Em dự đoán thiết kế này có giúp xe dừng trong vùng an toàn không?</legend>
         {[true, false].map((safe) => (
-          <label className="challenge-surface" key={String(safe)}>
+          <label
+            className="challenge-surface"
+            key={String(safe)}
+            data-selected={prediction.safe === safe}
+          >
             <input
               type="radio"
               name="prediction"

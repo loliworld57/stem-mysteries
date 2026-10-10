@@ -21,7 +21,10 @@ export function ChallengeReflection({
   dispatch: (action: ChallengeAction) => void;
 }) {
   return (
-    <section className="challenge-panel challenge-controls" aria-labelledby="reflection-title">
+    <section
+      className="challenge-panel challenge-controls challenge-reflection-panel"
+      aria-labelledby="reflection-title"
+    >
       <h2 id="reflection-title">Nhìn lại quá trình thiết kế</h2>
       <p id="reflection-help">
         Mỗi câu chỉ cần một ý ngắn theo trải nghiệm của nhóm; không có giới hạn độ dài tối thiểu. Có

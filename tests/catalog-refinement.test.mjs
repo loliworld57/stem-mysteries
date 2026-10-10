@@ -7,6 +7,13 @@ import { runInThisContext } from "node:vm";
 import React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import ts from "typescript";
+import {
+  catalogPageSizes,
+  catalogViewReducer,
+  initialCatalogView,
+  paginateCatalog,
+  paginationPages,
+} from "../lib/catalog-pagination.ts";
 import { createChallengeState, challengeReducer } from "../lib/challenge-state.ts";
 import { restoreChallenge, serializeChallenge } from "../lib/challenge-storage.ts";
 import { problemCatalog } from "../lib/problem-catalog.ts";
@@ -31,6 +38,7 @@ function loadComponent(filename) {
   const code = ts.transpileModule(readFileSync(path, "utf8"), {
     compilerOptions: {
       module: ts.ModuleKind.CommonJS,
+      target: ts.ScriptTarget.ES2022,
       jsx: ts.JsxEmit.ReactJSX,
       esModuleInterop: true,
     },
@@ -179,9 +187,121 @@ test("a second Challenge renders all metadata through the unchanged reusable car
 test("catalog empty state and reset are rendered accessibly", () => {
   const { CatalogBrowser } = loadComponent("components/catalog/catalog-browser.tsx");
   const html = renderToStaticMarkup(React.createElement(CatalogBrowser, { entries: [] }, []));
-  assert.match(html, /Chưa tìm thấy hoạt động phù hợp/);
-  assert.match(html, /Đặt lại bộ lọc/);
+  assert.match(html, /Chưa tìm thấy nội dung phù hợp/);
+  assert.ok(!html.includes("Xóa bộ lọc"));
+  assert.match(html, /Tìm kiếm hoạt động\.\.\./);
+  assert.match(html, /role="search"/);
+  assert.equal((html.match(/aria-expanded="false"/g) ?? []).length, 3);
+  assert.ok(!html.includes("<details"));
+  assert.ok(!html.includes("<fieldset"));
   assert.match(html, /aria-live="polite"/);
+});
+
+test("Challenge briefing presents engineering instructions before an initially disabled start action", () => {
+  const { ChallengeIntroduction } = loadComponent(
+    "components/challenge/challenge-introduction.tsx",
+  );
+  const html = renderToStaticMarkup(React.createElement(ChallengeIntroduction, { onStart() {} }));
+  const sections = [
+    "Tình huống thực tiễn",
+    "Nhiệm vụ thiết kế",
+    "Tiêu chí và ràng buộc",
+    "Kiến thức cần vận dụng",
+    "Quy trình thực hiện",
+    "Bắt đầu thiết kế",
+  ];
+  const positions = sections.map((text) => html.indexOf(text));
+  assert.ok(
+    positions.every(
+      (position, index) => position >= 0 && (index === 0 || position > positions[index - 1]),
+    ),
+  );
+  assert.match(html, /10–30/);
+  assert.match(html, /từ chân dốc/);
+  assert.match(html, /5.*lần thử chính thức tối đa/);
+  assert.match(html, /Vận tốc không phải tiêu chí thành công độc lập/);
+  assert.match(html, /nguyên mẫu/);
+  assert.match(html, /không bắt buộc/);
+  assert.match(html, /<button[^>]*disabled=""/);
+  assert.ok(!html.includes("Sắp tới"));
+  assert.equal((html.match(/data-state="upcoming"/g) ?? []).length, 6);
+});
+
+test("pagination slices filtered results and calculates total pages and visible ranges", () => {
+  const entries = Array.from({ length: 25 }, (_, index) => ({
+    id: index,
+    title: `Hoạt động ${index}`,
+    subjectIds: ["physics"],
+    gradeIds: [index < 12 ? "9" : "8"],
+    topicIds: ["friction"],
+  }));
+  const filtered = filterCatalog(entries, { ...emptyCatalogFilters, gradeIds: ["9"] });
+  const first = paginateCatalog(filtered, 1, catalogPageSizes.mystery);
+  assert.equal(first.totalPages, 2);
+  assert.deepEqual(
+    first.items.map((entry) => entry.id),
+    [0, 1, 2, 3, 4, 5, 6, 7, 8],
+  );
+  assert.deepEqual([first.start, first.end], [1, 9]);
+  const last = paginateCatalog(filtered, 2, catalogPageSizes.mystery);
+  assert.deepEqual(
+    last.items.map((entry) => entry.id),
+    [9, 10, 11],
+  );
+  assert.deepEqual([last.start, last.end], [10, 12]);
+});
+
+test("search, each filter category, removal and reset return pagination to page one", () => {
+  const laterPage = catalogViewReducer(initialCatalogView, { type: "page", page: 3 });
+  assert.equal(laterPage.page, 3);
+  for (const patch of [
+    { search: "xe" },
+    { topicIds: ["friction"] },
+    { gradeIds: ["9"] },
+    { subjectIds: ["physics"] },
+    emptyCatalogFilters,
+  ]) {
+    const state = catalogViewReducer(laterPage, {
+      type: "filters",
+      update: (filters) => ({ ...filters, ...patch }),
+    });
+    assert.equal(state.page, 1);
+    assert.deepEqual(state.filters, { ...emptyCatalogFilters, ...patch });
+  }
+});
+
+test("pagination clamps first and last pages, handles empty and one-page catalogs, and accepts custom sizes", () => {
+  const entries = Array.from({ length: 12 }, (_, index) => index);
+  assert.equal(catalogPageSizes.challenge, 6);
+  assert.equal(paginateCatalog(entries, 1, 6).totalPages, 2);
+  assert.equal(paginateCatalog(entries, 1, 4).totalPages, 3);
+  assert.equal(paginateCatalog(entries, 0, 4).page, 1);
+  assert.equal(paginateCatalog(entries, 99, 4).page, 3);
+  assert.equal(paginateCatalog(entries, 1, 20).totalPages, 1);
+  assert.deepEqual(paginateCatalog([], 5, 9), {
+    page: 1,
+    totalPages: 0,
+    items: [],
+    start: 0,
+    end: 0,
+  });
+  for (const size of [0, -1, 1.5])
+    assert.throws(() => paginateCatalog(entries, 1, size), RangeError);
+});
+
+test("pagination controls indicate current page, disable boundaries and hide for one page", () => {
+  const { CatalogPagination } = loadComponent("components/catalog/catalog-pagination.tsx");
+  const render = (page, totalPages) =>
+    renderToStaticMarkup(
+      React.createElement(CatalogPagination, { page, totalPages, onPageChange: () => {} }),
+    );
+  assert.equal(render(1, 1), "");
+  assert.equal(render(1, 0), "");
+  assert.match(render(1, 3), /disabled=""[^>]*>← Trước/);
+  assert.match(render(3, 3), /disabled=""[^>]*>Tiếp →/);
+  assert.match(render(2, 3), /aria-label="Trang 2" aria-current="page"/);
+  assert.deepEqual(paginationPages(50, 100), [1, "ellipsis", 49, 50, 51, "ellipsis", 100]);
+  assert.ok(paginationPages(1, 100).length <= 7);
 });
 
 test("the seven report sections render saved evidence and student writing without changing state", () => {

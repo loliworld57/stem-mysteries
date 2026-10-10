@@ -9,7 +9,10 @@ export function DesignControls({
   onChange: (design: ChallengeDesign) => void;
 }) {
   return (
-    <section className="challenge-panel challenge-controls" aria-labelledby="design-controls-title">
+    <section
+      className="challenge-panel challenge-controls challenge-design-controls"
+      aria-labelledby="design-controls-title"
+    >
       <h2 id="design-controls-title">Phương án của nhóm</h2>
       <label htmlFor="challenge-height">
         Độ cao: <strong>{design.heightCm} cm</strong>
@@ -44,7 +47,7 @@ export function DesignControls({
       <fieldset>
         <legend>Bề mặt dốc và vùng dừng</legend>
         {(Object.keys(challengeSurfaces) as ChallengeSurfaceId[]).map((id) => (
-          <label key={id} className="challenge-surface">
+          <label key={id} className="challenge-surface" data-selected={design.surfaceId === id}>
             <input
               type="radio"
               name="challenge-surface"

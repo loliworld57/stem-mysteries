@@ -22,7 +22,7 @@ export function ExperimentResult({
       aria-labelledby="experiment-result-title"
     >
       <h2 id="experiment-result-title">Bằng chứng từ lần thử {count}</h2>
-      <p role="status">
+      <p className="challenge-result-status" data-status={evidence.status} role="status">
         <strong>{evidence.status === "success" ? "ĐẠT YÊU CẦU" : "CHƯA ĐẠT YÊU CẦU"}</strong> ·{" "}
         {statusLabels[evidence.status]}
       </p>

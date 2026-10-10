@@ -9,7 +9,7 @@ export default function ChallengeCatalogPage() {
     <section className="home-section">
       <h1>Thử thách STEM</h1>
       <p>Thiết kế, thử nghiệm và cải tiến giải pháp từ kiến thức khoa học.</p>
-      <CatalogBrowser entries={challengeCatalog}>
+      <CatalogBrowser variant="challenge" entries={challengeCatalog}>
         {challengeCatalog.map((challenge) => (
           <ChallengeCard
             key={challenge.id}

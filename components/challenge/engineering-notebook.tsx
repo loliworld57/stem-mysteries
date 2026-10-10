@@ -62,6 +62,7 @@ export function EngineeringNotebook({
             return (
               <article
                 className="challenge-attempt"
+                data-status={attempt.evidence.status}
                 key={attempt.id}
                 aria-labelledby={`attempt-${attempt.id}`}
               >
