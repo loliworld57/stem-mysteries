@@ -21,7 +21,10 @@ export function ChallengeReflection({
   dispatch: (action: ChallengeAction) => void;
 }) {
   return (
-    <section className="challenge-panel challenge-controls" aria-labelledby="reflection-title">
+    <section
+      className="challenge-panel challenge-controls challenge-reflection-panel"
+      aria-labelledby="reflection-title"
+    >
       <h2 id="reflection-title">Nhìn lại quá trình thiết kế</h2>
       <p id="reflection-help">
         Mỗi câu chỉ cần một ý ngắn theo trải nghiệm của nhóm; không có giới hạn độ dài tối thiểu. Có
@@ -29,7 +32,10 @@ export function ChallengeReflection({
         lưu.
       </p>
       {reflectionQuestions.map((question, index) => (
-        <div key={question}>
+        <details className="report-writing" key={question} open={index === 0}>
+          <summary>
+            {index + 1}. {question}
+          </summary>
           <label htmlFor={`reflection-${index}`}>
             {index + 1}. {question}
           </label>
@@ -42,7 +48,7 @@ export function ChallengeReflection({
             aria-describedby="reflection-help"
             onChange={(event) => dispatch({ type: "reflection", index, text: event.target.value })}
           />
-        </div>
+        </details>
       ))}
       {!completed && (
         <button

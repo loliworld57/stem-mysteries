@@ -4,12 +4,18 @@ import { stoppingChartMaxCm, stoppingDistanceMarker } from "@/lib/challenge-visu
 import { formatNumber } from "@/lib/format";
 import type { ChallengeAttempt } from "@/lib/challenge-types";
 
-export function StoppingDistanceComparison({ attempts }: { attempts: ChallengeAttempt[] }) {
+export function StoppingDistanceComparison({
+  attempts,
+  titleId = "distance-comparison-title",
+}: {
+  attempts: ChallengeAttempt[];
+  titleId?: string;
+}) {
   const completed = attempts.filter((attempt) => attempt.completed);
   if (!completed.length) return null;
   return (
-    <section className="challenge-distance-comparison" aria-labelledby="distance-comparison-title">
-      <h3 id="distance-comparison-title">So sánh quãng đường dừng</h3>
+    <section className="challenge-distance-comparison" aria-labelledby={titleId}>
+      <h3 id={titleId}>So sánh quãng đường dừng</h3>
       <p>
         Vùng dừng an toàn: {challengeConfig.safeZoneMinCm}–{challengeConfig.safeZoneMaxCm} cm. Các
         lần thử dùng chung thang đo; hình chỉ hiển thị đến {stoppingChartMaxCm} cm.

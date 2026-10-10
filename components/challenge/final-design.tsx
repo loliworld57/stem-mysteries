@@ -57,7 +57,11 @@ export function FinalDesign({
         {state.attempts
           .filter((attempt) => attempt.completed)
           .map((attempt) => (
-            <div className="challenge-final-option" key={attempt.id}>
+            <div
+              className="challenge-final-option"
+              key={attempt.id}
+              data-selected={argument.attemptId === attempt.id}
+            >
               <label className="challenge-surface">
                 <input
                   type="radio"

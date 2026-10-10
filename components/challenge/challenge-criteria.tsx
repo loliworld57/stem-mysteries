@@ -1,9 +1,9 @@
 import { challengeConfig } from "@/lib/challenge-config";
 
-export function ChallengeCriteria() {
+export function ChallengeCriteria({ titleId = "criteria-title" }: { titleId?: string }) {
   return (
-    <aside className="challenge-panel challenge-criteria" aria-labelledby="criteria-title">
-      <h2 id="criteria-title">TIÊU CHÍ THIẾT KẾ</h2>
+    <aside className="challenge-panel challenge-criteria" aria-labelledby={titleId}>
+      <h2 id={titleId}>TIÊU CHÍ THIẾT KẾ</h2>
       <ul>
         <li>Xe phải đi xuống hết đường dốc.</li>
         <li>Xe phải đến được vùng dừng an toàn.</li>

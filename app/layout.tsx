@@ -6,6 +6,7 @@ import "@/styles/home.css";
 import "@/styles/mystery.css";
 import "@/styles/energy.css";
 import "@/styles/quiz.css";
+import "@/styles/catalog.css";
 
 const beVietnamPro = localFont({
   src: [

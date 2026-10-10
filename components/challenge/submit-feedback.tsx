@@ -24,6 +24,12 @@ export function checkRequiredFields(fields: RequiredField[]): boolean {
       </ul>
     ),
   });
-  document.querySelector<HTMLElement>(missing[0].selector)?.focus();
+  const target = document.querySelector<HTMLElement>(missing[0].selector);
+  let ancestor = target?.parentElement;
+  while (ancestor) {
+    if (ancestor instanceof HTMLDetailsElement) ancestor.open = true;
+    ancestor = ancestor.parentElement;
+  }
+  target?.focus();
   return false;
 }

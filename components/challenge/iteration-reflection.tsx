@@ -12,12 +12,19 @@ export function IterationReflection({
   dispatch: (action: ChallengeAction) => void;
 }) {
   return (
-    <section className="challenge-panel challenge-controls" aria-labelledby="improvement-title">
+    <section
+      className="challenge-panel challenge-controls challenge-improvement-panel"
+      aria-labelledby="improvement-title"
+    >
       <h2 id="improvement-title">Kế hoạch cải tiến</h2>
       <fieldset>
         <legend>Ở lần thử tiếp theo, nhóm em muốn thay đổi yếu tố nào?</legend>
         {(Object.keys(improvementFactors) as ImprovementFactor[]).map((factor) => (
-          <label className="challenge-surface" key={factor}>
+          <label
+            className="challenge-surface"
+            key={factor}
+            data-selected={decision.factor === factor}
+          >
             <input
               type="radio"
               name="improvement-factor"

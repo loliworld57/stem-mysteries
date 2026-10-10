@@ -6,24 +6,31 @@ interface CatalogMetadata {
   description: string;
 }
 
-export interface ProblemDefinition {
+export interface AcademicMetadata {
+  subjectIds: readonly string[];
+  gradeIds: readonly string[];
+  topicIds: readonly string[];
+  featured?: boolean;
+  featuredOrder?: number;
+}
+
+export interface ProblemDefinition extends AcademicMetadata {
   id: ProblemId;
   title: string;
   description: string;
   href: `/kham-pha/${string}`;
-  topics: readonly string[];
   caseLabel: string;
   activitySummary: string;
   metadata: CatalogMetadata;
 }
 
-export interface ChallengeDefinition {
-  id: ChallengeId;
+export interface ChallengeDefinition extends AcademicMetadata {
+  id: string;
   number: number;
   title: string;
   description: string;
   href: `/thu-thach/${string}`;
-  topics: readonly string[];
+  activitySummary: string;
   caseLabel: string;
   relatedProblemIds: readonly ProblemId[];
   metadata: CatalogMetadata;

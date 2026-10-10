@@ -7,10 +7,10 @@ import {
 } from "../lib/challenge-state.ts";
 import { restoreChallenge, serializeChallenge } from "../lib/challenge-storage.ts";
 
-test("short phrases and numeric notes are accepted; blank or punctuation-only input is not", () => {
-  for (const text of ["ok", "Ổn", "24", "  24 cm  "]) assert.ok(hasMeaningfulReason(text));
-  for (const text of ["", "   ", "...", "!?", "\n\t"])
-    assert.equal(hasMeaningfulReason(text), false);
+test("short phrases and numeric notes are accepted; only blank input is rejected", () => {
+  for (const text of ["ok", "Ổn", "24", "  24 cm  ", "...", "!?"])
+    assert.ok(hasMeaningfulReason(text));
+  for (const text of ["", "   ", "\n\t"]) assert.equal(hasMeaningfulReason(text), false);
 });
 
 test("short responses advance the full cycle and survive completion and physical-validation reload", () => {
