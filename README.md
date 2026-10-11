@@ -1,5 +1,7 @@
 # STEM Mysteries
 
+**Deployed Application**: [stem.ecm.io.vn](https://stem.ecm.io.vn)
+
 An interactive Vietnamese-language STEM learning application designed to help Grade 9 students investigate physics concepts, explain observations with evidence, and apply scientific understanding through engineering design.
 
 The application combines browser-based simulations, reasoning questions, a structured design challenge, and reusable E-learning interface components for classroom and independent learning.
@@ -326,7 +328,7 @@ npm start
 
 `npm start` serves the production build on port 3000 by default. The current configuration uses the standard Next.js build and server; it does not configure static export or standalone output.
 
-No application-specific environment variables or external service credentials are required for the existing features. A public deployment URL is not documented here.
+No application-specific environment variables or external service credentials are required for the existing features. The deployed application is available at [stem.ecm.io.vn](https://stem.ecm.io.vn).
 
 ---
 
@@ -421,6 +423,7 @@ The following are potential directions, not implemented capabilities or committe
 
 ## Quick Links
 
+- **Deployed Application**: [stem.ecm.io.vn](https://stem.ecm.io.vn)
 - **Local Application**: [Home](http://localhost:3000)
 - **Investigations**: [Activity Catalog](http://localhost:3000/kham-pha)
 - **Engineering Challenges**: [Challenge Catalog](http://localhost:3000/thu-thach)
