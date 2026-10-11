@@ -1,203 +1,430 @@
 # STEM Mysteries
 
-**Từ sự tò mò đến khám phá bằng bằng chứng khoa học.**
+An interactive Vietnamese-language STEM learning application designed to help Grade 9 students investigate physics concepts, explain observations with evidence, and apply scientific understanding through engineering design.
 
-![Next.js](https://img.shields.io/badge/Next.js-App_Router-111827)
-![TypeScript](https://img.shields.io/badge/TypeScript-Type_safe-3178C6)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4-38BDF8)
-![Trạng thái](https://img.shields.io/badge/Trạng_thái-Prototype_được_kiểm_thử-2563EB)
-![Giấy phép](https://img.shields.io/badge/Giấy_phép-Chưa_chọn-lightgrey)
+The application combines browser-based simulations, reasoning questions, a structured design challenge, and reusable E-learning interface components for classroom and independent learning.
 
-Website giáo dục tiếng Việt dành cho học sinh lớp 9, kết hợp mô phỏng vật lí, câu hỏi suy luận và giao diện E-learning. Bộ UI mở rộng có chuyển động mượt, thẻ khóa học, giáo trình, thông báo và một dashboard minh họa. Thiết kế ưu tiên chữ dễ đọc, khoảng trắng và khả năng trình chiếu trong lớp học.
+---
 
-## Tính năng
+## Table of Contents
 
-### Khám phá khoa học
+- [Project Overview](#project-overview)
+- [Key Features](#key-features)
+- [Learning Activities](#learning-activities)
+- [System Architecture](#system-architecture)
+- [Technology Stack](#technology-stack)
+- [Physics Models](#physics-models)
+- [Data Storage & Privacy](#data-storage--privacy)
+- [Deployment Architecture](#deployment-architecture)
+- [Local Development](#local-development)
+- [Content & Component Development](#content--component-development)
+- [Current Scope & Future Enhancements](#current-scope--future-enhancements)
+- [Quick Links](#quick-links)
 
-- Hai bài độc lập: **Chiếc xe trượt xa** và **Năng lượng trên dốc**.
-- Thay đổi điều kiện mô phỏng để so sánh ma sát, vận tốc, độ cao và năng lượng.
-- Mỗi bài có 3 câu hỏi suy luận; chọn câu tự do, chấm cả bài sau khi nộp.
-- Bảng kết quả chỉ nêu điểm và câu sai. Học sinh quay lại thí nghiệm để tự kiểm chứng.
-- Vận tốc hiển thị bằng km/h, năng lượng bằng J; định dạng số theo tiếng Việt.
+---
 
-### Thử thách STEM — Hoàn thiện Challenge 01
+## Project Overview
 
-- Trang chủ phân biệt **Vấn đề khám phá** (tìm hiểu hiện tượng) và **Thử thách STEM** (thiết kế giải pháp).
-- **Thử thách STEM 01 — Thiết kế đường dốc an toàn** tại `/thu-thach/duong-doc-an-toan`.
-- Nhận tình huống, xem tiêu chí và thiết kế bằng độ cao 20–60 cm, góc nghiêng 10–40°, bề mặt Nhẵn / Trung bình / Nhám.
-- Hình dốc cập nhật theo thiết kế, cùng tỉ lệ hai trục. Vùng dừng an toàn: 10–30 cm tính từ chân dốc; tối đa 5 lần thử chính thức.
-- Chọn dự đoán Có / Không và giải thích trước mỗi lần thử. Đổi thiết kế sẽ xóa dự đoán cũ. Mô phỏng dùng cùng mô hình với số liệu kết quả và bỏ chuyển động khi bật giảm chuyển động.
-- Vận tốc là bằng chứng để phân tích, **không phải tiêu chí đạt yêu cầu**. Kết quả hiển thị vận tốc tại chân dốc, quãng đường dừng, thế năng ban đầu và động năng tại chân dốc.
-- Sổ tay kỹ sư tự ghi thí nghiệm hoàn thành, gồm thiết kế, dự đoán, số liệu, phân tích và kế hoạch cải tiến. Thẻ kết quả responsive giúp so sánh các lần thử; bảng thiết kế mới đánh dấu yếu tố thay đổi so với lần trước. Không suy ra quan hệ nhân quả khi đổi nhiều yếu tố.
-- Biểu đồ quãng đường dừng dùng chung thang 0–60 cm, đánh dấu vùng 10–30 cm. Giá trị vượt phạm vi có mũi tên và số liệu thật; xe chưa đến chân dốc không được vẽ như giá trị 0 cm. Số liệu hiển thị một chữ số thập phân theo tiếng Việt, mô hình và tiêu chí giữ độ chính xác nội bộ.
-- Sau lần 1–4, nhóm phải phân tích số liệu rồi chọn yếu tố cải tiến (hoặc giữ nguyên để kiểm tra lại) và giải thích trước khi thiết kế tiếp. Nhận xét chấp nhận ý ngắn có chữ hoặc số, không quy định độ dài tối thiểu; gợi ý giúp nhóm liên hệ số liệu, không chấm đúng/sai. Thiết kế đạt yêu cầu vẫn được tiếp tục thử. Sau lần 5, chỉ phân tích và xem lại bằng chứng; không có lần thử thứ 6 hoặc yêu cầu kế hoạch cải tiến nữa.
-- Sau lần thử thứ 5 và phân tích, nhóm xem lại sổ tay, tự chọn bất kỳ phương án đã thử (kể cả chưa đạt), chọn lần thử làm bằng chứng và viết lựa chọn, nhận xét số liệu, giải thích và so sánh. Không tự chọn phương án tốt nhất, chấm điểm hoặc đánh giá đúng/sai bài viết. Phương án đã nộp được giữ nguyên cùng bản tổng kết.
-- Năm câu suy ngẫm có thể lưu từng phần. Hoàn thành phần trực tuyến khi đã nộp phương án và ghi đủ năm nhận xét; vẫn xem được sổ tay và phương án. Sửa suy ngẫm sau hoàn thành mở lại bước suy ngẫm để nhóm xác nhận lại.
-- Hoạt động mô hình thật dùng vật liệu lớp học, lưu dự đoán trước khi nhập số đo, so sánh với phương án đã chọn và giải thích khác biệt. Ghi nhận này độc lập với năm lần thử mô phỏng và không bắt buộc để hoàn thành phần trực tuyến. Ghi chú giới hạn mô hình chỉ hiện trong phần kiểm chứng thật sau khi nộp nhận xét.
-- Tiến trình được lưu trên trình duyệt này qua localStorage phiên bản 2, giữ khóa `stem-mysteries:safe-ramp:v1` để nâng cấp dữ liệu phiên bản 1 tại chỗ: thiết kế nháp, dự đoán, giai đoạn, các lần thử, phân tích, cải tiến, phương án đề xuất, bằng chứng, suy ngẫm và kiểm chứng thật. Nâng cấp giữ nguyên sổ tay và không tự chọn phương án. Khi tải lại giữa hoạt ảnh, kết quả đã tính được khôi phục để phân tích mà không chạy lại hoặc ghi trùng. Dữ liệu không hợp lệ/phiên bản không hỗ trợ mở chu trình mới và thông báo; khi trình duyệt từ chối lưu, bài vẫn chạy trong bộ nhớ và thông báo giới hạn lưu trữ. Không tải lên máy chủ hoặc đồng bộ đám mây.
-- Nút bắt đầu lại ở cuối trang yêu cầu xác nhận khi đã có lần thử, xóa toàn bộ dữ liệu chu trình (cả phương án, suy ngẫm và kiểm chứng thật) và không hoạt động khi đang thử nghiệm. Sau hoàn thành, nút có nhãn “Bắt đầu chu trình thiết kế mới”. Không ảnh hưởng hai vấn đề khám phá.
-- Cấu hình: `lib/challenge-config.ts`; kiểu dữ liệu và reducer: `lib/challenge-types.ts`, `lib/challenge-state.ts`; mô hình dốc: `lib/challenge-physics.ts`; kiểm tra và lưu dữ liệu: `lib/challenge-storage.ts`; trạng thái giao diện: `hooks/use-engineering-challenge.ts`.
-- Mô hình động lực học: `L = h / sin(θ)`, `a = g(sin(θ) − μcos(θ))`, `v² = 2aL` khi `a > 0`, `s = v²/(2μg)`. Dùng g = 10 m/s²; μ minh họa là 0,10 / 0,20 / 0,35, không phải số đo vật liệu thật. Bỏ qua năng lượng quay, lực cản không khí và tổn hao ở chân dốc. Khi gia tốc không dương, xe đứng yên; số liệu tại chân dốc được ghi là không đến chân dốc. Khi xe vượt khung hình, chỉ báo cho biết xe đi tiếp ngoài khung, số liệu vẫn ghi toàn bộ quãng đường.
+### Educational Problem
 
-### Bộ UI E-learning
+Students can memorize formulas for friction, kinetic energy, and gravitational potential energy without understanding how those relationships explain observable motion. Classroom instruction also needs accessible ways to connect scientific investigation with designing, testing, and improving a practical solution.
 
-- `CourseCard`: ảnh Next Image, danh mục, giảng viên, điểm đánh giá, số học viên và hiệu ứng nhấc thẻ khi hover.
-- `SkeletonCard`: cùng tỉ lệ ảnh và kích thước nội dung với thẻ thật, shimmer bằng CSS.
-- `InteractiveButton`: hover gradient, phản hồi nhấn, trạng thái disabled và loading.
-- `SyllabusAccordion`: mở chương với AnimatePresence, chiều cao tự động và chevron xoay.
-- `CourseNavigation`: thanh tiến độ cuộn, menu xuất hiện sau hero và chỉ báo mục đang đọc.
-- Sonner: thông báo success, error và info cho các thao tác minh họa.
-- `ThemeToggle`: công tắc sáng/tối bằng next-themes **chỉ cho khu demo UI**; khu STEM vẫn sáng cố định.
-- `EmptyState`: bố cục nội dung trống với hành động chính rõ ràng.
+### Solution
 
-### Hiệu năng và khả năng tiếp cận
+STEM Mysteries provides two complementary learning experiences:
 
-- Ảnh có vùng bố cục cố định, `sizes` responsive; avatar có width/height.
-- Nút và liên kết có focus ring; accordion dùng `aria-expanded` và `aria-controls`.
-- Skeleton có trạng thái tải dành cho trình đọc màn hình.
-- Chuyển động tôn trọng `prefers-reduced-motion`; listener và observer được dọn khi unmount.
-- Font Be Vietnam Pro được phục vụ tại chỗ, hỗ trợ tiếng Việt.
+- **Scientific Investigations (Vấn đề khám phá)**: Observe a phenomenon, change simulation conditions, and answer reasoning questions using experimental evidence.
+- **Engineering Challenges (Thử thách STEM)**: Define a design, make predictions, test it against constraints, analyze results, and justify a proposed solution.
 
-## Công nghệ
+The current learning content focuses on Grade 9 physics. The interface uses Vietnamese text, locally served fonts, readable layouts, and a classroom presentation mode.
 
-| Công nghệ                     | Vai trò                                                |
-| ----------------------------- | ------------------------------------------------------ |
-| Next.js 16 / React 19         | App Router, Server Components, routing và ảnh          |
-| TypeScript                    | Kiểu dữ liệu component và mô phỏng                     |
-| Tailwind CSS 4                | Utility classes, responsive và dark variant có phạm vi |
-| Framer Motion                 | Hover, tap, accordion, chỉ báo điều hướng và tiến độ   |
-| Lucide React                  | Icon SVG thống nhất                                    |
-| Sonner                        | Thông báo thao tác                                     |
-| next-themes                   | Lưu lựa chọn sáng/tối của demo                         |
-| ESLint / Prettier / Node test | Kiểm tra mã, định dạng và kiểm thử                     |
+### Target Users
 
-## Bắt đầu
+| User               | Purpose                                                                                     |
+| ------------------ | ------------------------------------------------------------------------------------------- |
+| **Students**       | Explore physics relationships and check their understanding through interactive experiments |
+| **Student Groups** | Collaborate on design trials, record evidence, and explain engineering decisions            |
+| **Teachers**       | Present simulations and guide discussion, investigation, and physical prototype activities  |
+| **Developers**     | Extend learning content and reuse the separate E-learning UI kit                            |
 
-### 1. Chuẩn bị
+These describe intended audiences; the application currently has no accounts or role-based permissions.
 
-Dùng Node.js **22.18 trở lên** và npm. Mức này hỗ trợ chạy các kiểm thử TypeScript trực tiếp bằng Node.
+### Value Proposition
 
-### 2. Lấy mã nguồn
+- **Evidence-Based Learning**: Connect predictions and explanations to observable simulation results.
+- **Engineering Practice**: Support repeated testing, analysis, improvement, and reflection.
+- **Classroom Accessibility**: Provide large text, presentation controls, responsive layouts, and reduced-motion support.
+- **Simple Setup**: Run the existing activities without a database, credentials, or external service configuration.
+- **Extensible Content**: Organize investigations and challenges through typed catalogs and dedicated routes.
 
-Thay placeholder bằng URL repository của bạn:
+---
 
-```bash
-git clone <repository-url>
-cd <repository-directory>
+## Key Features
+
+### Scientific Investigations
+
+- **Friction & Braking**: Compare stopping distances across rubber, wood, and ice while changing initial speed.
+- **Energy on a Ramp**: Change release height and observe gravitational potential energy converting into kinetic energy on a frictionless ramp.
+- **Independent Activities**: Each investigation has its own simulation and three reasoning questions.
+- **Submission-Based Assessment**: Students answer all questions before submitting; results show the score and incorrect questions without revealing correct answers or worked explanations.
+- **Experiment Review**: Students return to the simulation to check their reasoning while retaining their answers during the current activity session.
+- **Localized Measurements**: Display speed in km/h and energy in J, using Vietnamese number formatting.
+
+### Safe Ramp Engineering Challenge
+
+- **Design Controls**: Set ramp height from 20–60 cm, angle from 10–40°, and a smooth, medium, or rough surface.
+- **Safety Constraint**: The vehicle must reach the ramp bottom and stop 10–30 cm beyond it; bottom speed is supporting evidence rather than a separate success criterion.
+- **Prediction Before Testing**: Record a prediction and explanation before each official trial. Changing the design clears the previous prediction.
+- **Five-Trial Cycle**: Analyze every trial and plan improvements before trials two through five. A successful design can still be tested again; there is no sixth trial.
+- **Engineering Notebook**: Record designs, predictions, measurements, analysis, and improvement plans, with changed factors identified for comparison.
+- **Comparable Results**: Plot stopping distances on a shared 0–60 cm scale, marking the safety zone and explicitly indicating overflow or failure to reach the ramp bottom.
+- **Student-Selected Solution**: After five trials and their analyses, select any tested design and justify the choice with evidence, reasoning, and comparison.
+- **Reflection & Completion**: Save five reflections and complete the online activity after submitting a proposal and all reflections. Editing reflections reopens that step for confirmation.
+- **Physical Validation**: Optionally test a classroom prototype, record predictions and measurements, and explain differences from the selected simulated design.
+- **Progress Recovery**: Restore saved progress after a reload, including a calculated result interrupted during animation, without consuming another trial.
+- **Confirmed Reset**: Starting a new cycle clears its records after confirmation when trials exist; resetting is disabled during an experiment.
+
+Written explanations and proposed solutions are not automatically graded. Physical validation is separate from the five simulation trials and is optional for online completion.
+
+### Activity Catalogs
+
+- **Separate Catalogs**: Browse scientific investigations and engineering challenges independently.
+- **Search & Filters**: Search titles with Vietnamese accent normalization and filter by topic, grade, and subject.
+- **Featured Activities**: Display selected catalog entries on the home page.
+- **Related Learning**: Link the safe ramp challenge to both existing investigations.
+
+### E-learning UI Kit
+
+| Component                | Capability                                                                            |
+| ------------------------ | ------------------------------------------------------------------------------------- |
+| **CourseCard**           | Course illustration, category, instructor, rating, learner count, and hover animation |
+| **SkeletonCard**         | Matching loading layout with a CSS shimmer effect                                     |
+| **InteractiveButton**    | Hover and press feedback, loading state, and disabled state                           |
+| **SyllabusAccordion**    | Animated chapter expansion and lesson selection callbacks                             |
+| **CourseNavigation**     | Scroll progress and active-section navigation                                         |
+| **EmptyState**           | Empty-content presentation with a primary action                                      |
+| **ThemeToggle**          | Persistent light/dark preference scoped to the UI demo                                |
+| **Sonner Notifications** | Success, error, and informational feedback for demonstration actions                  |
+
+The dashboard, instructors, ratings, and learner counts are demonstration data. The STEM learning area uses a fixed light theme independently of the UI kit theme.
+
+### Accessibility & Presentation
+
+- **Classroom Mode**: Presentation controls and readable text for group instruction.
+- **Keyboard Access**: Visible focus indicators and accessible accordion state attributes.
+- **Reduced Motion**: Animations respect the user's reduced-motion preference.
+- **Stable Image Layouts**: Explicit image dimensions and responsive sizing reduce layout shifts.
+- **Vietnamese Typography**: Be Vietnam Pro is served locally with its accompanying OFL license.
+
+---
+
+## Learning Activities
+
+| Activity                       | Route                           | Learning Focus                                                                 |
+| ------------------------------ | ------------------------------- | ------------------------------------------------------------------------------ |
+| **Home**                       | `/`                             | Introduction, featured investigations, and STEM challenges                     |
+| **Investigation Catalog**      | `/kham-pha`                     | Search and browse scientific investigations                                    |
+| **Chiếc xe trượt xa**          | `/kham-pha/chiec-xe-truot-xa`   | Friction, kinetic energy, and braking distance                                 |
+| **Năng lượng trên dốc**        | `/kham-pha/nang-luong-tren-doc` | Potential energy, kinetic energy, and mechanical energy conservation           |
+| **Challenge Catalog**          | `/thu-thach`                    | Search and browse engineering challenges                                       |
+| **Thiết kế đường dốc an toàn** | `/thu-thach/duong-doc-an-toan`  | Design iteration using friction, height, angle, and stopping-distance evidence |
+| **E-learning Showcase**        | `/ui-kit`                       | Reusable UI components and an illustrative dashboard                           |
+| **Catalog Layout Samples**     | `/kham-pha/mau`                 | Developer preview using repeated existing activity cards                       |
+
+The layout sample page does not add new learning activities and is marked to discourage search engine indexing.
+
+---
+
+## System Architecture
+
+### Web Application
+
+**Framework**: Next.js 16.3.8 with App Router\
+**Language**: TypeScript 5.x\
+**UI Runtime**: React 19.2.8
+
+Routes and layouts compose the interface. Client components and hooks manage interactive simulations, answers, and engineering challenge state. Physics functions, content definitions, state transitions, and storage validation live in separate library modules.
+
+### Core Components
+
+| Layer                    | Responsibility                                                                           |
+| ------------------------ | ---------------------------------------------------------------------------------------- |
+| **Routes & Layouts**     | Page composition, metadata, shared shell, and locally served fonts                       |
+| **Learning Components**  | Investigation steps, controls, animations, quizzes, and result displays                  |
+| **Challenge Components** | Design workflow, engineering notebook, proposal, reflections, and physical validation    |
+| **Hooks**                | Simulation timing, interaction state, quiz state, and challenge persistence              |
+| **Physics Modules**      | Unit conversion, braking calculations, energy calculations, and ramp dynamics            |
+| **Content Catalogs**     | Typed activity definitions, academic metadata, featured ordering, and related activities |
+| **Storage Modules**      | Browser storage access, challenge data validation, and schema migration                  |
+| **UI Kit**               | Reusable E-learning interface components with scoped styles and providers                |
+
+### Project Structure
+
+```text
+app/
+  layout.tsx                       # Shared layout, fonts, and metadata
+  page.tsx                         # Home page
+  globals.css                      # Global styles and STEM theme
+  kham-pha/                        # Investigation catalog and activity routes
+  thu-thach/                       # Challenge catalog and safe ramp route
+  ui-kit/                          # E-learning component showcase
+components/
+  layout/                          # Header, footer, and presentation controls
+  home/                            # Home page sections
+  catalog/                         # Catalog browsing and activity cards
+  mystery/                         # Braking investigation
+  energy/                          # Ramp energy investigation
+  quiz/                            # Questions and submission results
+  challenge/                       # Engineering design workflow
+  ui-kit/                          # Reusable E-learning components
+hooks/                             # Simulation and learning state
+lib/                               # Physics, catalogs, quizzes, state, and storage
+styles/                            # Scoped interface styles
+public/
+  fonts/                           # Be Vietnam Pro and OFL license
+  ui-kit/                          # Local SVG illustrations
+tests/                             # Node-based tests
+docs/                              # STEM model and classroom guidance
 ```
 
-### 3. Cài thư viện
+### Learning Flow
 
-```bash
-npm install
+```text
+Home / Activity Catalogs
+          |
+          +--> Investigation --> Simulation --> Reasoning Questions --> Results
+          |
+          +--> Engineering Challenge
+                 Design --> Prediction --> Experiment --> Analysis
+                    ^                                       |
+                    +----------- Improvement <--------------+
+
+                 After Trial 5 and Analysis:
+                 Notebook Review --> Proposal --> Reflections --> Completion
+                                      |
+                                      +--> Optional Physical Validation
 ```
 
-Không cần biến môi trường cho phiên bản hiện tại. Chưa tích hợp cơ sở dữ liệu, đăng nhập, thanh toán hoặc dịch vụ ngoài.
+---
 
-### 4. Chạy local
+## Technology Stack
 
-```bash
-npm run dev
+| Category          | Technology           | Purpose                                                          |
+| ----------------- | -------------------- | ---------------------------------------------------------------- |
+| **Framework**     | Next.js 16.3.8       | App Router, page rendering, routing, and image handling          |
+| **UI Library**    | React 19.2.8         | Components and interactive state                                 |
+| **Language**      | TypeScript 5.x       | Typed interfaces, content, and simulation logic                  |
+| **Styling**       | Tailwind CSS 4.x     | Utility styling and responsive layouts                           |
+| **Animation**     | Framer Motion 13.x   | Interface transitions and interaction feedback                   |
+| **Icons**         | Lucide React         | SVG interface icons                                              |
+| **Notifications** | Sonner 2.x           | Toast feedback                                                   |
+| **Demo Theme**    | next-themes 0.4.x    | UI kit light/dark preference                                     |
+| **Code Quality**  | ESLint 9, Prettier 3 | Linting and formatting                                           |
+| **Testing**       | Node.js test runner  | Physics, assessment, catalog, workflow, and storage verification |
+| **Persistence**   | Browser localStorage | Engineering challenge progress and demo theme preference         |
+
+---
+
+## Physics Models
+
+### Shared Conventions
+
+- **Vehicle Mass**: 2 kg.
+- **Gravity**: 10 m/s² for classroom calculations.
+- **Speed Conversion**: Convert km/h to m/s by dividing by 3.6.
+- **Kinetic Energy**: `Ek = ½mv²`.
+- **Gravitational Potential Energy**: `Ep = mgh`.
+- **Mechanical Energy**: `E = Ek + Ep`.
+
+### Braking on a Horizontal Surface
+
+The model assumes locked wheels and constant sliding friction, excluding driver reaction time and wheel rotation.
+
+```text
+a = μg
+s = v² / (2a)
 ```
 
-| Trang                        | Đường dẫn                                          |
-| ---------------------------- | -------------------------------------------------- |
-| Trang chủ                    | http://localhost:3000/                             |
-| Ma sát và phanh xe           | http://localhost:3000/kham-pha/chiec-xe-truot-xa   |
-| Năng lượng trên dốc          | http://localhost:3000/kham-pha/nang-luong-tren-doc |
-| UI kit và dashboard minh họa | http://localhost:3000/ui-kit                       |
+Illustrative friction coefficients are 0.65 for rubber, 0.35 for wood, and 0.10 for ice. At 14.4 km/h, the initial kinetic energy is 16 J and stopping distances are approximately 1.23 m, 2.29 m, and 8.00 m respectively.
 
-### 5. Kiểm tra và chạy bản build
+### Frictionless Ramp Investigation
 
-```bash
-npm run lint
-npm test
-npm run format:check
+A vehicle starts from rest at a selected height of 1–4 m. The ramp has an 8 m horizontal projection. Potential energy converts into kinetic energy while total mechanical energy remains constant. At a release height of 2 m, total energy is 40 J.
+
+### Safe Ramp Challenge
+
+The challenge applies the selected friction coefficient to both the ramp and the horizontal stopping area. Height is converted from centimeters to meters before calculation.
+
+```text
+L = h / sin(θ)
+a = g(sin(θ) − μcos(θ))
+v² = 2aL                 when a > 0
+s = v² / (2μg)
+```
+
+| Surface    | Illustrative Friction Coefficient |
+| ---------- | --------------------------------- |
+| **Smooth** | 0.10                              |
+| **Medium** | 0.20                              |
+| **Rough**  | 0.35                              |
+
+If acceleration is nonpositive within numerical tolerance, the vehicle remains at rest and measurements at the ramp bottom are unavailable. Success classification uses unrounded measurements; displayed results use Vietnamese formatting with one decimal place.
+
+These are teaching models. Friction coefficients are illustrative rather than measured material properties; ramp models exclude wheel rotation and air resistance, and the challenge also excludes transition losses at the ramp bottom. See [STEM Model & Classroom Guide](docs/stem-guide.md) for assumptions and teaching guidance.
+
+---
+
+## Data Storage & Privacy
+
+### Persistence Behavior
+
+| Data                       | Storage                  | Reload Behavior                                                                                               |
+| -------------------------- | ------------------------ | ------------------------------------------------------------------------------------------------------------- |
+| **Investigation Progress** | In-memory activity state | Resets on reload; experiment notebook retains up to eight recent trials within the session                    |
+| **Challenge Progress**     | localStorage             | Restores designs, predictions, trials, analyses, improvements, proposal, reflections, and physical validation |
+| **UI Kit Theme**           | localStorage             | Restores the demo's theme preference                                                                          |
+| **Demo Progress & Notes**  | In-memory state          | Resets on reload                                                                                              |
+
+### Challenge Storage
+
+- **Storage Key**: `stem-mysteries:safe-ramp:v1`.
+- **Current Schema**: Version 2; version 1 data is migrated in place while retaining recorded trials.
+- **Recovery**: Interrupted animations restore their calculated result for analysis without recording a duplicate trial.
+- **Validation**: Invalid or unsupported data starts a clean cycle with user feedback.
+- **Fallback**: If browser storage is unavailable, the activity continues in memory and reports the persistence limitation.
+- **Reset**: Clears the complete challenge cycle, including proposal, reflections, and physical validation.
+
+The current application has no backend API, database, authentication, or cloud synchronization. Challenge records remain in the current browser and are not uploaded to a server. Clearing browser storage removes saved progress.
+
+---
+
+## Deployment Architecture
+
+### Runtime Structure
+
+```text
+Next.js Application (Node.js Server)
+                |
+                +--> Pages, Scripts, Styles, Fonts, and Illustrations
+                                  |
+                           Student Browser
+                                  |
+                         Interactive Simulations
+                                  |
+                         Local Challenge Storage
+```
+
+### Production Build
+
+Run from the application directory:
+
+```sh
+npm ci
 npm run build
 npm start
 ```
 
-`npm start` phục vụ bản production sau khi build. Dùng `npm run format` để định dạng mã.
+`npm start` serves the production build on port 3000 by default. The current configuration uses the standard Next.js build and server; it does not configure static export or standalone output.
 
-## Kiến trúc
+No application-specific environment variables or external service credentials are required for the existing features. A public deployment URL is not documented here.
 
-```text
-app/
-  layout.tsx                       # Font, metadata và khung trang
-  page.tsx                         # Trang chủ Server Component
-  globals.css                      # Theme STEM và Tailwind
-  kham-pha/
-    layout.tsx
-    chiec-xe-truot-xa/page.tsx
-    nang-luong-tren-doc/page.tsx
-  ui-kit/
-    layout.tsx                     # Provider và CSS có phạm vi
-    page.tsx                       # Trang showcase
-components/
-  layout/                          # Header, footer, trình chiếu
-  home/                            # Hero, STEM, quy trình và danh sách bài
-  mystery/                         # Luồng phanh xe
-  energy/                          # Luồng dốc và mô phỏng năng lượng
-  quiz/                            # Chọn câu, trả lời và bảng điểm
-  ui-kit/                          # Các component E-learning dùng lại
-hooks/                             # Mô phỏng và trạng thái trả lời
-lib/                               # Công thức, định dạng số, bộ câu hỏi
-styles/                            # CSS theo khu giao diện
-public/
-  fonts/                           # Be Vietnam Pro và giấy phép OFL
-  ui-kit/                          # Minh họa SVG local dùng qua Next Image
-tests/                             # Vật lí, chấm bài và độc lập giữa hai bài
+---
+
+## Local Development
+
+### Prerequisites
+
+- **Node.js**: 22.18 or later, supporting the project's direct TypeScript execution in tests.
+- **Package Manager**: npm.
+
+### Installation
+
+From the `stem-mysteries` application directory:
+
+```sh
+npm ci
+npm run dev
 ```
 
-Route chỉ ghép giao diện; logic tương tác nằm trong component client và hook. Bộ câu hỏi của từng bài được truyền vào hook chấm bài, không phụ thuộc vào một ngân hàng câu hỏi toàn cục.
+Open [http://localhost:3000](http://localhost:3000). For classroom use, enable **Chế độ trình chiếu**; F11 can also activate browser fullscreen on supported systems.
 
-## Sử dụng component
+### Build & Validation
 
-```tsx
-"use client";
+| Command                | Purpose                                                        |
+| ---------------------- | -------------------------------------------------------------- |
+| `npm run dev`          | Start the development server                                   |
+| `npm run lint`         | Check code with ESLint                                         |
+| `npm test`             | Run Node-based tests with TypeScript stripping                 |
+| `npm run format:check` | Check formatting across the configured source paths and README |
+| `npm run format`       | Apply Prettier formatting                                      |
+| `npm run build`        | Create the production build                                    |
+| `npm start`            | Serve the production build                                     |
 
-import { InteractiveButton, SyllabusAccordion, type Chapter } from "@/components/ui-kit";
+Tests cover physics calculations, independent investigations, quiz grading, catalog behavior, challenge design and experiment flows, completion, short responses, presentation logic, and browser persistence. Challenge verification includes all 3,813 allowed design combinations, safety-zone boundaries, motion, migration, and reset behavior.
 
-const chapters: Chapter[] = [
-  {
-    id: "chapter-1",
-    title: "Quan sát và đặt câu hỏi",
-    lessons: [
-      { id: "lesson-1", title: "Thiết kế thí nghiệm", kind: "text", duration: "5 phút đọc" },
-    ],
-  },
-];
+---
 
-export function Curriculum() {
-  return (
-    <>
-      <InteractiveButton onClick={() => console.log("Bắt đầu")}>Bắt đầu học</InteractiveButton>
-      <SyllabusAccordion chapters={chapters} onSelectLesson={(lesson) => console.log(lesson.id)} />
-    </>
-  );
-}
-```
+## Content & Component Development
 
-Khi sao chép bộ kit sang dự án khác, cài bốn thư viện UI, sao chép `components/ui-kit`, import `styles/ui-kit.css` và bọc khu giao diện trong `KitProviders`. Thêm dark variant từ `app/globals.css` và `suppressHydrationWarning` cho thẻ `html`. Provider dùng thuộc tính `data-kit-theme`, không đổi theme các trang STEM. CSS bổ sung có phạm vi `.ui-kit` để tương thích các style gốc của website hiện tại.
+### Key Files
 
-- `CourseCard`: truyền `href` thật, ảnh local hoặc static import. Với ảnh remote, cấu hình `images.remotePatterns` trong Next config.
-- `SyllabusAccordion`: callback nhận bài được chọn; kết nối callback với trình phát hoặc route bài học của bạn.
-- `CourseNavigation`: truyền `heroId` và danh sách `{ id, label }`; section đích cần `id`, `tabIndex={-1}` và scroll margin.
-- Sonner: gọi `toast.success()`, `toast.error()` hoặc `toast.info()` bên trong provider.
-- Đổi nội dung học: `lib/investigation-questions.ts`; đổi mô hình: `lib/physics.ts`.
+| File                                 | Responsibility                                          |
+| ------------------------------------ | ------------------------------------------------------- |
+| `lib/problem-catalog.ts`             | Investigation definitions and metadata                  |
+| `lib/challenge-catalog.ts`           | Challenge definitions and related investigations        |
+| `lib/catalog-types.ts`               | Separate investigation and challenge types              |
+| `lib/investigation-questions.ts`     | Investigation question content                          |
+| `lib/physics.ts`                     | Shared calculations and braking model                   |
+| `lib/challenge-config.ts`            | Challenge constraints, surfaces, and reflection prompts |
+| `lib/challenge-physics.ts`           | Safe ramp dynamics                                      |
+| `lib/challenge-types.ts`             | Challenge data types                                    |
+| `lib/challenge-state.ts`             | Challenge reducer and workflow transitions              |
+| `lib/challenge-storage.ts`           | Storage key, codec, validation, and schema migration    |
+| `lib/browser-state-storage.ts`       | Shared browser storage access and availability handling |
+| `hooks/use-engineering-challenge.ts` | Challenge interaction, animation, and persistence       |
 
-## Phạm vi hiện tại
+### Adding Learning Content
 
-Dashboard, tên giảng viên, đánh giá và số học viên trong UI kit là **dữ liệu minh họa**. Chưa có đăng ký khóa học, trình phát video hoặc API lưu ghi chú. Tiến trình và ghi chú demo mất khi tải lại trang; lựa chọn theme demo lưu trong localStorage. Hai bài STEM vẫn chạy hoàn toàn trong trình duyệt.
+1. Add the activity ID and typed definition to the appropriate catalog and include it in display order.
+2. Create a dedicated static route and compose its learning components.
+3. Read route metadata from the activity definition.
+4. Link challenges to relevant investigations through `relatedProblemIds`.
+5. Add or update the explicitly selected illustrations used by activity cards and the home page.
 
-Xem [hướng dẫn mô hình STEM](docs/stem-guide.md) để biết công thức, giả thiết và cách trình bày thí nghiệm. Dự án chưa chọn giấy phép mã nguồn; font có giấy phép riêng tại `public/fonts/OFL.txt`.
+Investigations and challenges remain separate content types. The safe ramp modules implement their specific workflow rather than a general-purpose challenge engine.
 
-## Tài liệu tham khảo
+### Reusing the UI Kit
 
-[Next.js Image](https://nextjs.org/docs/app/api-reference/components/image) · [Motion](https://motion.dev/docs/react-animate-presence) · [Tailwind dark mode](https://tailwindcss.com/docs/dark-mode) · [next-themes](https://github.com/pacocoursey/next-themes) · [Sonner](https://github.com/emilkowalski/sonner)
+Reusable components are exported from `components/ui-kit`. When moving the kit to another application, include its UI dependencies, import `styles/ui-kit.css`, and wrap the demo area in `KitProviders`.
 
-## Đăng ký nội dung và lưu trạng thái
+The provider uses `data-kit-theme`; preserve the scoped dark variant and HTML hydration handling when copying the theme integration. Supply real course links and lesson callbacks when integrating the kit into an actual learning workflow. Remote course images require an appropriate Next.js image configuration.
 
-Vấn đề khám phá và Thử thách STEM là hai kiểu riêng trong `lib/catalog-types.ts`. Thêm ID và định nghĩa vào `lib/problem-catalog.ts` hoặc `lib/challenge-catalog.ts`, rồi thêm mục vào danh sách theo thứ tự hiển thị. Tạo route tĩnh và ghép component riêng; route đọc metadata từ định nghĩa. Challenge liên kết các Problem qua `relatedProblemIds`. Hình minh họa vẫn được ghép rõ ràng trong component trang chủ.
+---
 
-`lib/browser-state-storage.ts` chỉ quản lý đọc/ghi đồng bộ theo key và trạng thái saved/invalid/unavailable. `lib/challenge-storage.ts` vẫn sở hữu key Safe Ramp, codec, kiểm tra dữ liệu/vật lí và migration phiên bản 1 → 2. Hook giữ thứ tự khôi phục trước khi lưu và tiếp tục bằng bộ nhớ khi trình duyệt từ chối lưu. Reset ghi trạng thái sạch theo schema hiện tại.
+## Current Scope & Future Enhancements
+
+### Current Scope
+
+The application currently delivers **two scientific investigations**, **one engineering challenge**, activity catalogs, and an E-learning UI showcase. It does not implement course enrollment, a video player, payment processing, server-backed notes, or teacher analytics. No source-code license has been selected; the bundled font has its own license at [public/fonts/OFL.txt](public/fonts/OFL.txt).
+
+### Possible Extensions
+
+The following are potential directions, not implemented capabilities or committed delivery plans:
+
+- **Additional Learning Content**: More investigations and engineering challenges across STEM topics.
+- **Teacher Workflows**: Classroom activity assignment and review of student evidence and reflections.
+- **Portable Records**: Export engineering notebooks and restore progress across devices.
+- **Connected Learning Features**: Accounts, backend persistence, and real course enrollment.
+- **Physical Experiment Support**: More structured comparison between simulated predictions and measured classroom results.
+
+---
+
+## Quick Links
+
+- **Local Application**: [Home](http://localhost:3000)
+- **Investigations**: [Activity Catalog](http://localhost:3000/kham-pha)
+- **Engineering Challenges**: [Challenge Catalog](http://localhost:3000/thu-thach)
+- **Safe Ramp Challenge**: [Thiết kế đường dốc an toàn](http://localhost:3000/thu-thach/duong-doc-an-toan)
+- **E-learning Components**: [UI Kit Showcase](http://localhost:3000/ui-kit)
+- **Model & Teaching Documentation**: [STEM Guide](docs/stem-guide.md)
+- **Font License**: [Be Vietnam Pro OFL](public/fonts/OFL.txt)
