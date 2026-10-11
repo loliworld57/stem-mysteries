@@ -1,5 +1,7 @@
 # STEM Mysteries
 
+**Deployed Application**: [stem.ecm.io.vn](https://stem.ecm.io.vn)
+
 **Từ sự tò mò đến khám phá bằng bằng chứng khoa học.**
 
 ![Next.js](https://img.shields.io/badge/Next.js-App_Router-111827)
